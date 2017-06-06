@@ -1,0 +1,336 @@
+#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/inPage.css'>
+                    <link type='text/css' rel='stylesheet' href='/css/jquery-ui.css'>
+                    <link type='text/css' rel='stylesheet' href='/css/dropzone.min.css'>")
+#set($custom_js = "<script type='text/javascript' src='/js/jquery-ui.min.js'></script>
+                    <script type='text/javascript' src='/js/dropzone.js'></script>
+                    <script type='text/javascript' src='/js/ajaxfileupload.js'></script>
+                    <script type='text/javascript' src='/js/globals.js'></script>
+                    <script type='text/javascript' src='/js/product.js'></script>")
+#set($url_s = "?x-oss-process=image/resize,m_fill,h_120,w_120")
+#set($domain = "http://m.platformchinaplp.mo")
+
+<div class="header">
+    <i class="fa fa-home"></i>
+    <a href="/" target="main">首页</a>
+    <p>»</p>
+    <p>商品管理</p>
+</div>
+<div class="content">
+    <div class="top">
+        <p>添加商品信息</p>
+        <div class="menu">
+            <a href="/product/add" target="main">
+                <i class="fa fa-plus"></i>
+                添加商品
+            </a>
+            <a href="/product" target="main">
+                <i class="fa fa-recycle"></i>
+                全部商品
+            </a>
+        </div>
+    </div>
+    <div class="tabBox">
+        <div class="menu">
+            <p></p>
+            <a class="current" href="javascript: void(0);">基本信息</a>
+            <a href="javascript: void(0);">詳細信息</a>
+            <a href="javascript: void(0);">中文</a>
+            <a href="javascript: void(0);">英文</a>
+            <a href="javascript: void(0);">葡萄牙語</a>
+        </div>
+        <div class="tab">
+            <div class="child">
+                <ul id="mainForm">
+                    <input type="hidden" id="id" value="$!product.id">
+                    <input type="hidden" id="services" value="$!services">
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            企業
+                        </p>
+                        <input type="text" id="company" value="$!product.company">
+                        <input type="hidden" id="companyId" value="$!product.companyId">
+                        <button id="selectCO">选择</button>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">企業服務：</p>
+                        <p class="service">
+
+                        </p>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            價格：
+                        </p>
+                        <input type="text" id="price" value="$!product.price">
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            產地：
+                        </p>
+                        <select id="countryId" value="">
+                            #foreach($cou in $countries)
+                                <option value="$cou.id" $cou.selected>$cou.nameCN</option>
+                            #end
+                        </select>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            购买链接：
+                        </p>
+                        <input type="text" id="buyUrl" value="$!product.buyUrl">
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">&nbsp;</p>
+                        <button class="submit" id="mainBtn">保存</button>
+                        <button onclick="history.go(-1);">返回</button>
+                    </li>
+                </ul>
+                #if(${product.id})
+                <div class="qrcode-list">
+                    <p style="color:#f00;">注：如果二维码生成不成功，请点击右键“重新加载框架”查看</p>
+                    <ul>
+                        <li>
+                            <h3 class="text-center">中文产品二维码</h3>
+                            <p><img src="http://qr.liantu.com/api.php?text=$!{domain}/pages/product.html%3Fid%3D$!product.id%26lang%3Dzh_CN&m=0&w=200&h=200" alt="中文产品二维码"></p>
+                            <p><textarea type="text" readonly>$!{domain}/pages/product.html?id=$!{product.id}&lang=zh_CN</textarea></p>
+                        </li>
+                        <li>
+                            <h3 class="text-center">英文产品二维码</h3>
+                            <p><img src="http://qr.liantu.com/api.php?text=$!{domain}/pages/product.html%3Fid%3D$!product.id%26lang%3Den_US&m=0&w=200&h=200" alt="英文产品二维码"></p>
+                            <p><textarea type="text" readonly>$!{domain}/pages/product.html?id=$!{product.id}&lang=en_US</textarea></p>
+                        </li>
+                        <li>
+                            <h3 class="text-center">葡文产品二维码</h3>
+                            <p><img src="http://qr.liantu.com/api.php?text=$!{domain}/pages/product.html%3Fid%3D$!product.id%26lang%3Dpt_PT&m=0&w=200&h=200" alt="葡文产品二维码"></p>
+                            <p><textarea type="text" readonly>$!{domain}/pages/product.html?id=$!{product.id}&lang=pt_PT</textarea></p>
+                        </li>
+                    </ul>
+                </div>
+                #end
+            </div>
+            <div class="child">
+                <ul>
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            分類：
+                        </p>
+                        <input type="text" id="category" value="$!category.nameCN">
+                        <input type="hidden" id="categoryId" value="$!category.categoryId">
+                        <button id="selectCT">选择</button>
+                    </li>
+##                    #foreach($property in $properties)
+##                        <li>
+##                            <p style=" width: 187px;">
+##                                <i class="require">*</i>
+##                                $!property.nameCN：
+##                            </p>
+##                            <input type="text" id="value" value="$!product.category">
+##                            <button name="selectValue">选择</button>
+##                        </li>
+##                    #end
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            圖片：
+                        </p>
+                        <form id="imageList" action="/Picture/upload" class="dropzone">
+                                <div class="fallback">
+                                    <input name="file" type="file" multiple/>
+                                </div>
+                            #foreach($picture in $productPicture)
+                            <div class="dz-preview dz-processing dz-image-preview dz-success dz-complete">
+                                <div class="dz-image"><img data-dz-thumbnail="" alt="$!picture.name"
+                                                           src="$!imgDomain$!picture.image$!url_s">
+                                </div>
+                                <div class="dz-details">
+                                    <div class="dz-filename"><span data-dz-name="">$!picture.name</span></div>
+                                </div>
+                                <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""
+                                                               style="width: 100%;"></span></div>
+                                <div class="dz-error-message"><span data-dz-errormessage=""></span></div>
+                                <div class="dz-success-mark">
+                                    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><title>Check</title>
+                                        <defs></defs>
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
+                                           sketch:type="MSPage">
+                                            <path d="M23.5,31.8431458 L17.5852419,25.9283877 C16.0248253,24.3679711 13.4910294,24.366835 11.9289322,25.9289322 C10.3700136,27.4878508 10.3665912,30.0234455 11.9283877,31.5852419 L20.4147581,40.0716123 C20.5133999,40.1702541 20.6159315,40.2626649 20.7218615,40.3488435 C22.2835669,41.8725651 24.794234,41.8626202 26.3461564,40.3106978 L43.3106978,23.3461564 C44.8771021,21.7797521 44.8758057,19.2483887 43.3137085,17.6862915 C41.7547899,16.1273729 39.2176035,16.1255422 37.6538436,17.6893022 L23.5,31.8431458 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z"
+                                                  id="Oval-2" stroke-opacity="0.198794158" stroke="#747474"
+                                                  fill-opacity="0.816519475" fill="#FFFFFF"
+                                                  sketch:type="MSShapeGroup"></path>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <div class="dz-error-mark">
+                                    <svg width="54px" height="54px" viewBox="0 0 54 54" version="1.1"
+                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><title>Error</title>
+                                        <defs></defs>
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
+                                           sketch:type="MSPage">
+                                            <g id="Check-+-Oval-2" sketch:type="MSLayerGroup" stroke="#747474"
+                                               stroke-opacity="0.198794158" fill="#FFFFFF" fill-opacity="0.816519475">
+                                                <path d="M32.6568542,29 L38.3106978,23.3461564 C39.8771021,21.7797521 39.8758057,19.2483887 38.3137085,17.6862915 C36.7547899,16.1273729 34.2176035,16.1255422 32.6538436,17.6893022 L27,23.3431458 L21.3461564,17.6893022 C19.7823965,16.1255422 17.2452101,16.1273729 15.6862915,17.6862915 C14.1241943,19.2483887 14.1228979,21.7797521 15.6893022,23.3461564 L21.3431458,29 L15.6893022,34.6538436 C14.1228979,36.2202479 14.1241943,38.7516113 15.6862915,40.3137085 C17.2452101,41.8726271 19.7823965,41.8744578 21.3461564,40.3106978 L27,34.6568542 L32.6538436,40.3106978 C34.2176035,41.8744578 36.7547899,41.8726271 38.3137085,40.3137085 C39.8758057,38.7516113 39.8771021,36.2202479 38.3106978,34.6538436 L32.6568542,29 Z M27,53 C41.3594035,53 53,41.3594035 53,27 C53,12.6405965 41.3594035,1 27,1 C12.6405965,1 1,12.6405965 1,27 C1,41.3594035 12.6405965,53 27,53 Z"
+                                                      id="Oval-2" sketch:type="MSShapeGroup"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <a class="dz-remove remove" href="javascript:undefined;" data-ppid="$!picture.id" data-dz-remove="">删除</a>
+                            #*<a style="margin-left: 2rem" class="dz-detail setMain"
+                                href="javascript:undefined;">主图</a></div>*#
+                            </div>
+                            #end
+                        </form>
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">&nbsp;</p>
+                        <button class="submit" id="catBtn">保存</button>
+                        <button onclick="history.go(-1);">返回</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="child">
+                <ul>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            名稱(中文)：
+                        </p>
+                        <input id="nameCN" type="text" value="$!product.name">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            規格(中文)：
+                        </p>
+                        <input id="sizeCN" type="text" value="$!product.size">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            詳情(中文)：
+                        </p>
+                        <input id="detailCN" type="text" value="$!product.detail">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">&nbsp;</p>
+                        <button class="submit" id="cnBtn">保存</button>
+                        <button onclick="history.go(-1);">返回</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="child">
+                <ul>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            名稱(英文)：
+                        </p>
+                        <input id="nameEN" type="text" value="$!productEN.name">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫英文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            規格(英文)：
+                        </p>
+                        <input id="sizeEN" type="text" value="$!productEN.size">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫英文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            詳情(英文)：
+                        </p>
+                        <input id="detailEN" type="text" value="$!productEN.detail">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫英文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">&nbsp;</p>
+                        <button class="submit" id="enBtn">保存</button>
+                        <button onclick="history.go(-1);">返回</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="child">
+                <ul>
+                    <li>
+                        <p style=" width: 188px;">
+                            <i class="require">*</i>
+                            名稱(葡萄牙語)：
+                        </p>
+                        <input id="namePOR" type="text" value="$!productPT.name">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫葡萄牙語
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">
+                            <i class="require">*</i>
+                            規格(葡萄牙語)：
+                        </p>
+                        <input id="sizePOR" type="text" value="$!productPT.size">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫葡萄牙語
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">
+                            <i class="require">*</i>
+                            詳情(葡萄牙語)：
+                        </p>
+                        <input id="detailPOR" type="text" value="$!productPT.detail">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫葡萄牙語
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">&nbsp;</p>
+                        <button class="submit" id="porBtn">保存</button>
+                        <button onclick="history.go(-1);">返回</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="dialog" title="添加企業">
+            <iframe src="/enterprise/query" width="680" height="420" style="display: none;border: 0"></iframe>
+        </div>
+        <div id="dialogCT" title="添加类目">
+            <iframe src="/category/query" width="680" height="420" style="display: none;border: 0"></iframe>
+        </div>
+##        <div id="dialogValue" title="添加属性值">
+##            <iframe src="/value/query" width="680" height="420" style="display: none;border: 0"></iframe>
+##        </div>
+    </div>
+</div>

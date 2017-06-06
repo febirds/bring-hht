@@ -1,0 +1,235 @@
+#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/inPage.css'>
+                    <link type='text/css' rel='stylesheet' href='/css/jquery-ui.css'>
+                    <link type='text/css' rel='stylesheet' href='/css/dropzone.min.css'>")
+#set($custom_js = "<script type='text/javascript' src='/js/jquery-ui.min.js'></script>
+                    <script type='text/javascript' src='/js/ueditor.config.js'></script>
+                    <script type='text/javascript' src='/js/ueditor.all.js'></script>
+                    <script type='text/javascript' src='/js/dropzone.js'></script>
+                    <script type='text/javascript' src='/js/ajaxfileupload.js'></script>
+                    <script type='text/javascript' src='/js/globals.js'></script>
+                    <script type='text/javascript' src='/js/article.js'></script>")
+
+#set($script_js = "
+<script>
+    $(function () {
+        var contentCN_UE = UE.getEditor('contentCN');
+        var contentEN_UE = UE.getEditor('contentEN');
+        var contentPT_UE = UE.getEditor('contentPT');
+        contentCN_UE.addListener('ready', function () {
+            contentCN_UE.setContent('${article.contentCN}');
+        })
+        contentEN_UE.addListener('ready', function () {
+            contentEN_UE.setContent('${article.contentEN}');
+        })
+        contentPT_UE.addListener('ready', function () {
+            contentPT_UE.setContent('${article.contentPT}');
+        })
+    })
+</script>
+")
+#set($url_s = "?x-oss-process=image/resize,m_fill,h_120,w_120")
+#set($domain = "http://m.platformchinaplp.mo")
+
+<div class="header">
+    <i class="fa fa-home"></i>
+    <a href="/" target="main">首页</a>
+    <p>»</p>
+    <p>經貿信息</p>
+</div>
+<div class="content">
+    <div class="top">
+        <p>添加經貿信息</p>
+        <div class="menu">
+            <a href="/article/add" target="main">
+                <i class="fa fa-plus"></i>
+                添加文章
+            </a>
+            <a href="/article" target="main">
+                <i class="fa fa-recycle"></i>
+                全部文章
+            </a>
+        </div>
+    </div>
+    <div class="tabBox">
+        <div class="menu">
+            <p></p>
+            <a class="current" href="javascript: void(0);">基本信息</a>
+            <a href="javascript: void(0);">中文</a>
+            <a href="javascript: void(0);">英文</a>
+            <a href="javascript: void(0);">葡萄牙語</a>
+            <a href="javascript: void(0);">圖片信息</a>
+        </div>
+        <div class="tab">
+            <div class="child">
+                <ul id="mainForm">
+                    <input type="hidden" name="id" value="$!article.id">
+                    #*<input type="hidden" name="contentEN" value="$!article.contentEN">
+                    <input type="hidden" name="contentCN" value="$!article.contentCN">
+                    <input type="hidden" name="contentPT" value="$!article.contentPT">*#
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            國家：
+                        </p>
+                        <select id="countryId" value="$!article.countryId">
+                            #foreach($cou in $countries)
+                                <option value="$cou.id" $!cou.selected>$cou.nameCN</option>
+                            #end
+                        </select>
+                    </li>
+                </ul>
+            </div>
+            <div class="child">
+                <ul>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            標題(中文)：
+                        </p>
+                        <input name="titleCN" type="text" value="$!article.titleCN">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            來源(中文)：
+                        </p>
+                        <input name="sourceCN" type="text" value="$!article.sourceCN">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            內容(中文)：
+                        </p>
+                        <script id="contentCN" name="contentCN" type="text/plain" style="width:860px;height:500px; float: left; margin: 0 10px;"></script>
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="child">
+                <ul>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            標題(英文)：
+                        </p>
+                        <input name="titleEN" type="text" value="$!article.titleEN">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫英文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            來源(英文)：
+                        </p>
+                        <input name="sourceEN" type="text" value="$!article.sourceEN">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫英文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            內容(英文)：
+                        </p>
+                        <script id="contentEN" name="contentEN" type="text/plain" style="width:860px;height:500px; float: left; margin: 0 10px;"></script>
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫英文
+							</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="child">
+                <ul>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            標題(葡文)：
+                        </p>
+                        <input name="titlePT" type="text" value="$!article.titlePT">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫葡文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            來源(葡文)：
+                        </p>
+                        <input name="sourcePT" type="text" value="$!article.sourcePT">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫葡文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            內容(葡文)：
+                        </p>
+                        <script id="contentPT" name="contentPT" type="text/plain" style="width:860px;height:500px; float: left; margin: 0 10px;"></script>
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫葡文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">&nbsp;</p>
+                        <button class="submit" id="submit">保存</button>
+                        <button onclick="history.go(-1);">返回</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="child">
+                <ul>
+
+                                <li>
+                                <p style=" width: 187px;">
+                                <i class="require">*</i>
+                                圖片：
+                        </p>
+                        <form id="imageList" action="/Picture/upload" class="dropzone">
+                                <div class="fallback">
+                                    <input name="file" type="file" multiple/>
+                                </div>
+                            #foreach($picture in $articlePicture)
+                            <div class="dz-preview dz-processing dz-image-preview dz-success dz-complete">
+                                    <div class="dz-image"><img alt="$!picture.name" src="$!imgDomain$!picture.image$!url_s"> </div>
+                                    <div class="dz-details">
+                                        <div class="dz-filename"><span >$!picture.name</span></div>
+                                    </div>
+                                    <div class="dz-progress"><span class="dz-upload" style="width: 100%;"></span></div>
+                                    <div class="dz-error-message"><span data-dz-errormessage=""></span></div>
+                                    <a class="dz-remove remove" href="javascript:undefined;" data-ppid="$!picture.id" data-dz-remove="">删除</a>
+                                    <a style="margin-left: 2rem;font-size:14px" class="dz-detail setMain" data-ppid="$!picture.id" data-ppurl="$!picture.image"
+                                    href="javascript:undefined;">
+                                    #if($!picture.isMain == 1)
+                                        已是主圖
+                                    #else
+                                        設爲主圖
+                                    #end
+                                    </a>
+                            </div>
+                            #end
+                        </form>
+                        </li>
+                        </ul>
+            </div>
+        </div>
+    </div>
+</div>

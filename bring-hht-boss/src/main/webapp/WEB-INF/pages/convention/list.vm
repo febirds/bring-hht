@@ -1,0 +1,104 @@
+#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/inPage.css'>")
+#set($custom_js = "<script type='text/javascript' src='/js/jquery-ui.min.js'></script>
+                    <script type='text/javascript' src='/js/globals.js'></script>")
+#set($script_js = "
+<script>
+    $(function () {
+        $('#search').on('click', function () {
+            var _id = $('#searchId').val() || ''
+            var _title = $('#searchKey').val() || ''
+            var _countryId = $('#countryId').val() || ''
+            window.location.href = '/convention?id='+_id+'&name='+encodeURI(_title)+'&countryId='+_countryId
+        })
+    })
+</script>
+")
+<div class="header">
+    <i class="fa fa-home"></i>
+    <a href="/" target="main">首页</a>
+    <p>»</p>
+    <p>展會信息</p>
+</div>
+<div class="content">
+    <div class="top">
+        <p>展會列表</p>
+        <div class="menu">
+            <a href="/convention/add" target="main">
+                <i class="fa fa-plus"></i>
+                添加展會
+            </a>
+            <a href="/convention">
+                <i class="fa fa-recycle"></i>
+                展會列表
+            </a>
+            <a href="/conventionApply">
+                <i class="fa fa-recycle"></i>
+                申請記錄列表
+            </a>
+            <input  type="text" id="searchId" placeholder="ID" class="form-control" value="" style="float: left;padding: 2px 10px;">
+            <input  type="text" id="searchKey" placeholder="展會名稱" class="form-control" value="$!{name}" style="float: left;padding: 2px 10px;">
+            <select style="padding: 2px 10px;float:left" id="countryId" value="">
+                <option value="">国家</option>
+                #foreach($cou in $countries)
+                    <option value="$cou.id" $!cou.selected>$cou.nameCN</option>
+                #end
+            </select>
+            <a id="search" href="javascript:;" class="btn" style="padding: 0 10px;margin-left: 10px;line-height: 22px;border: 1px solid #ddd;">
+                搜索
+            </a>
+        </div>
+    </div>
+    <div class="table">
+        <table>
+            <tr class="title">
+                <th class="tc">ID</th>
+                <th>名稱</th>
+                <th>類型</th>
+                <th>地址</th>
+                <th>聯繫人</th>
+                <th>國家</th>
+                <th>主辦單位</th>
+                <th>承辦單位</th>
+                <th>操作</th>
+            </tr>
+            #foreach($convention in $result)
+            <tr>
+                <td class="tc">$!convention.id</td>
+                <td>$!convention.nameCN</td>
+                <td>$!convention.conventionCategoryName</td>
+                <td>$!convention.addressCN</td>
+                <td>$!convention.contactsCN</td>
+                <td>$!convention.countryName</td>
+                <td>$!convention.hostUnitCN</td>
+                <td>$!convention.takeUnitCN</td>
+                <td>
+                    <a href="/convention/get?id=$!convention.id">修改</a>
+                    #if($convention.online == '1')
+                        <a class="online" data-href="/convention/offline?id=$!convention.id" href="javascript:void(0)" target="_self">下線</a>
+                    #else
+                        <a class="online" data-href="/convention/online?id=$!convention.id" href="javascript:void(0)" target="_self">上線</a>
+                    #end
+                    <a class="delete" data-href="/convention/delete?id=$!convention.id" href="javascript:void(0)" target="_self">刪除</a>
+                </td>
+            </tr>
+            #end
+        </table>
+    </div>
+    <div style="text-align: center">
+        <ul class="pagination" data-page="$!pageNo" data-href="/convention?name=$!key" data-total="$!totalCount">
+            <li class="disabled"><a href="#" class="prev" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+            <li><a href="#" class="next" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+        </ul>
+        <div style="display: inline-block" class="form-group">
+            <div style="float: left;margin-bottom: 1px;line-height: 30px">转到</div>
+            <div style="float: left;" class="gopage">
+                <div class="input-group form-inline form-group">
+                    <input type="text" class="form-control pageno" placeholder="" style="width:75px">
+                </div>
+            </div>
+            <span style="float: left;" class="input-group-btn">
+                    <button class="btn btn-default pagego" data-href="/convention?name=$!key" type="button">Go!</button>
+            </span>
+        </div>
+    </div>
+</div>

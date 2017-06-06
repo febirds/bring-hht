@@ -1,0 +1,25 @@
+<!-- 全局常量设置 -->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>萄语国家信息网</title>
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/public.css">
+    $!custom_css
+    $!custom_head
+</head>
+
+<body>
+
+<!-- 内容页 -->
+    $!screen_content
+
+    <script type="text/javascript" src="/js/jQuery.js"></script>
+    $!custom_js
+    $!script_js
+</body>
+</html>
+
+
+

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+        
+    <mybatis:scan base-package="gv.hht.interior.mapper" />
+    
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <property name="name" value="bring-hht-web" />
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        
+        <property name="url" value="jdbc:mysql://localhost:3306/cghht?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true" />
+        <property name="username" value="root" />
+        <property name="password" value="root" />
+        <property name="filters" value="commonLogging,wall" />
+
+        <property name="maxActive" value="20" />
+        <property name="initialSize" value="2" />
+        <property name="maxWait" value="30000" />
+        <property name="useUnfairLock" value="true" />
+        <property name="minIdle" value="2" />
+
+        <property name="timeBetweenEvictionRunsMillis" value="600000" />
+        <property name="validationQuery" value="SELECT 1 from dual;" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+        <property name="maxOpenPreparedStatements" value="50" />
+        
+        <property name="removeAbandoned" value="true" /> <!-- 打开removeAbandoned功能 -->
+        <property name="logAbandoned" value="false" /> <!-- 关闭abanded连接时输出错误日志 -->
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:web-mybatis-config.xml"></property>
+        <property name="dataSource" ref="druidDataSource"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="druidDataSource"/>
+    </bean>
+
+    <!--激活注解的事务驱动，这个时候业务层的所有事务都将通过上面配置的 transactionManager -->
+    <tx:annotation-driven/>
+
+</beans>

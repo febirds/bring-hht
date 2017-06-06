@@ -1,0 +1,119 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <mvc:annotation-driven>
+        <mvc:argument-resolvers>  
+            <bean class="gv.hht.utils.spring.RequestJsonArgumentResolver"/>
+        </mvc:argument-resolvers>  
+        <mvc:message-converters>
+            <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                <property name="features">
+                    <list>
+                        <value>WriteDateUseDateFormat</value>
+                        <value>WriteEnumUsingToString</value>
+                        <value>WriteMapNullValue</value>
+                        <value>WriteNullStringAsEmpty</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <mvc:resources mapping="/js/**" location="/js/" />
+    <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/fonts/**" location="/fonts/" />
+    <mvc:resources mapping="/img/**" location="/img/" />
+    <bean class="gv.hht.utils.spring.ApplicationContextUtils"/>
+
+    <!-- 读取集中配置文件，方便注解管理的bean使用配置值，可在被托管的bean中使用注解Value("bring-hht-web")方式注入 
+         但需要注意的是，SpringContext与SpringMVC的容器使用的不是同一套，必要时需要配置两份
+    -->
+<!--    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <array>
+                <value>classpath:boss-configs.properties</value>
+            </array>
+        </property>
+    </bean>-->
+
+    <context:component-scan base-package="gv.hht.web"/>
+    <context:component-scan base-package="gv.hht.utils.spring"/>
+
+    <bean id="viewResolver" class="gv.hht.utils.spring.UrlBrokerVelocityViewResolver">
+        <property name="cache" value="false"/>
+        <property name="prefix" value=""/>
+        <property name="suffix" value=".vm"/>
+        <property name="contentType">
+            <value>text/html;charset=UTF-8</value>
+        </property>
+        <property name="requestContextAttribute" value="requestContext"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="layoutUrl" value="layout/layout.vm"/>
+        <!-- 设置使用velocity layout功能 -->
+        <property name="viewContextUtils">
+            <map>
+                <entry key="UrlBroker" value-ref="urlBrokerFactory"/>
+                <entry key="DateTimeFormatterProvider" value="gv.hht.utils.time.DateTimeFormatterProvider"/>
+                <entry key="DateUtils" value="gv.hht.utils.time.DateUtils"/>
+                <entry key="Money" value="gv.hht.utils.money.Money"/>
+                <entry key="StringUtils" value="org.apache.commons.lang3.StringUtils"/>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 配置文件上传解析器 -->
+    <bean id="multipartResolver" class="gv.hht.utils.upload.CommonsMultipartResolverUtil">
+        <property name="maxUploadSize" value="4194304"/>
+    </bean>
+    <bean id="velocityConfigurer" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/WEB-INF/pages/"/>
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">utf-8</prop>
+                <prop key="output.encoding">utf-8</prop>
+                <prop key="velocimacro.library">VM_global_library.vm</prop>
+                <!-- 定义全局宏的文件 -->
+                <prop key="directive.foreach.counter.initial.value">1</prop>
+                <!-- 定义全局宏的文件 -->
+
+                <!-- 宏scope设置 -->
+                <!-- 配置说明：自己模板内宏若与全局宏同名，则在自己的模板内自己的宏优先于全局宏。
+                     且模板内定义的宏不会被其它模板共享，不会影响全局宏在其它模板下的表现。
+                     如此设置比较符合直觉。
+                -->
+                <prop key="velocimacro.permissions.allow.inline">true</prop>
+                <!-- true:允许 模板内自定义宏 -->
+                <prop key="velocimacro.permissions.allow.inline.to.replace.global">false</prop>
+                <!-- true:模板内自定义宏 会 影响全局宏在其它模板下的表现 -->
+                <prop key="velocimacro.permissions.allow.inline.local.scope">true</prop>
+                <!-- true:模板内自定义宏 不会 被其它模板使用 -->
+                <!-- 宏scope设置结束 -->
+
+                <!-- 模板自动重加载设置 -->
+                <!-- 配置说明：开发环境下开启自动重加载会有利于随时变化随时测试，生产环境下应关闭利于性能
+                -->
+                <prop key="velocimacro.library.autoreload">true</prop>
+                <!-- true:允许 宏自动重加载 -->
+                <prop key="file.resource.loader.cache">true</prop>
+                <!-- true:允许 模板自动重加载 -->
+                <prop key="file.resource.loader.modificationCheckInterval">4</prop>
+                <!-- 每次自动重加载间隔时间 -->
+                <!-- 模板自动重加载设置结束 -->
+            </props>
+        </property>
+    </bean>
+
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="gv.hht.web.interceptor.LoginCheckInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+</beans>

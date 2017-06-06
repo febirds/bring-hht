@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/bring-hht.iml" filepath="$PROJECT_DIR$/.idea/bring-hht.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bring-hht-boss/bring-hht-boss.iml" filepath="$PROJECT_DIR$/bring-hht-boss/bring-hht-boss.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bring-hht-common/bring-hht-common.iml" filepath="$PROJECT_DIR$/bring-hht-common/bring-hht-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bring-hht-web/bring-hht-web.iml" filepath="$PROJECT_DIR$/bring-hht-web/bring-hht-web.iml" />
+    </modules>
+  </component>
+</project>

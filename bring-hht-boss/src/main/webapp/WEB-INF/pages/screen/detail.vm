@@ -1,0 +1,41 @@
+#set($layout = "layout/emptyLayout.vm")##
+<style>
+
+    #product-detail {padding:10px;font-size: 14px; width: 100%;line-height: 200%;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+
+    #product-detail p {margin: 0;}
+    #product-detail > table {width: 100%;}
+    #product-detail table td {line-height: 1.5;}
+    #product-detail table td[width="100"] {width: 150px;}
+    #product-detail img {display: inline-block !important;max-width: 100%;margin: auto;}
+    #product-detail .pro_box_title img {display: block !important;}
+    #product-detail .attrBox {margin: 10px auto;}
+    #product-detail .attrBox h3 {margin: 0;padding: 2px 15px;color: #fff;background-color:#bd8f7e;}
+    #product-detail .attrBox ul {display: table;width: 100%;margin-bottom: 0;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+    #product-detail .attrBox li {display: table-row;}
+    #product-detail .attrBox li:last-child {display: table-row;}
+    #product-detail .attrBox li:last-child .label,
+    #product-detail .attrBox li:last-child .content {border: none;}
+    #product-detail .attrBox li:last-child .content {border: none;}
+    #product-detail .attrBox .content {display: table-cell;}
+
+</style>
+
+
+<div id="product-detail">
+    $content
+</div>
+
+<script type="text/javascript">
+    var proIMG = document.querySelectorAll('#product-detail img');
+    for (var i = 0; i < proIMG.length; i++) {
+        proIMG[i].removeAttribute('width');
+        proIMG[i].removeAttribute('height');
+    }
+
+    // remove embed in iOS
+    var embed = document.querySelectorAll('#product-detail embed');
+    for (var i = 0; i < embed.length; i++) {
+        embed[i].remove();
+    }
+</script>

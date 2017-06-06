@@ -1,0 +1,76 @@
+#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/inPage.css'>")
+#set($custom_js = "<script type='text/javascript' src='/js/ajaxfileupload.js'></script>
+                    <script type='text/javascript' src='/js/globals.js'></script>
+                    <script type='text/javascript' src='/js/property.js'></script>")
+
+<div class="header">
+    <i class="fa fa-home"></i>
+    <a href="/" target="main">首页</a>
+    <p>»</p>
+    <p>屬性管理</p>
+</div>
+<div class="content">
+    <div class="top">
+        <p>添加屬性信息</p>
+        <div class="menu">
+            <a href="/property/add" target="main">
+                <i class="fa fa-plus"></i>
+                添加屬性
+            </a>
+            <a href="/property" target="main">
+                <i class="fa fa-recycle"></i>
+                全部屬性
+            </a>
+        </div>
+    </div>
+    <div class="tabBox">
+        <div class="menu">
+            <p></p>
+            <a class="current" href="javascript: void(0);">添加屬性</a>
+        </div>
+        <div class="tab">
+            <div class="child">
+                <ul id="mainForm">
+                    <input type="hidden" id="id" value="$!property.id">
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            名稱(中文)：
+                        </p>
+                        <input id="nameCN" type="text" value="$!property.nameCN">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            名稱(英文)：
+                        </p>
+                        <input id="nameEN" type="text" value="$!property.nameEN">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫英文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            名稱(葡文)：
+                        </p>
+                        <input id="namePT" type="text" value="$!property.namePT">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫葡文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">&nbsp;</p>
+                        <button class="submit" id="mainBtn">保存</button>
+                        <button onclick="history.go(-1);">返回</button>
+                    </li>
+                </ul>
+            </div>
+    </div>
+</div>

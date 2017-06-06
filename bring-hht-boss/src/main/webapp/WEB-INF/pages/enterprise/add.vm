@@ -1,0 +1,297 @@
+#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/inPage.css'>")
+#set($custom_js = "<script type='text/javascript' src='/js/ajaxfileupload.js'></script>
+                    <script type='text/javascript' src='/js/globals.js'></script>
+                    <script type='text/javascript' src='/js/enterprise.js'></script>")
+
+<div class="header">
+    <i class="fa fa-home"></i>
+    <a href="/" target="main">首页</a>
+    <p>»</p>
+    <p>企業管理</p>
+</div>
+<div class="content">
+    <div class="top">
+        <p>添加企業信息</p>
+        <div class="menu">
+            <a href="/enterprise/add" target="main">
+                <i class="fa fa-plus"></i>
+                添加企業
+            </a>
+            <a href="/enterprise" target="main">
+                <i class="fa fa-recycle"></i>
+                全部企業
+            </a>
+        </div>
+    </div>
+    <div class="tabBox">
+        <div class="menu">
+            <p></p>
+            <a class="current" href="javascript: void(0);">通用信息</a>
+            <a href="javascript: void(0);">中文</a>
+            <a href="javascript: void(0);">英文</a>
+            <a href="javascript: void(0);">葡萄牙語</a>
+        </div>
+        <div class="tab">
+            <div class="child" style=" min-width: 900px;">
+                <ul id="mainForm">
+                    <input type="hidden" id="id" value="$!company.id">
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            企業類型：
+                        </p>
+                        <select id="type" >
+                            #if($!company.company == "company")
+                                <option value="company" selected>公司</option>
+                            #else
+                                <option value="company">公司</option>
+                            #end
+                        </select>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            企業性質：
+                        </p>
+                        <select id="nature" hidden>
+                            #if($!company.nature == "enterprise")
+                                <option value="enterprise" selected>企業</option>
+                            #else
+                                <option value="enterprise">企業</option>
+                            #end
+                        </select>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">僱傭人數：</p>
+                        <select id="peopleNum">
+                            #if($!company.peopleNum == 1)
+                                <option value="1" selected>0-50人</option>
+                            #else
+                                <option value="1">0-50人</option>
+                            #end
+                            #if($!company.peopleNum == 2)
+                                <option value="2" selected>50-150人</option>
+                            #else
+                                <option value="2">0-50人</option>
+                            #end
+                            #if($!company.peopleNum == 3)
+                                <option value="3" selected>150-500人</option>
+                            #else
+                                <option value="3">150-500人</option>
+                            #end
+                            #if($!company.peopleNum == 4)
+                                <option value="4" selected>500-1000人</option>
+                            #else
+                                <option value="4">500-1000人</option>
+                            #end
+                            #if($!company.peopleNum == 5)
+                                <option value="5" selected>1000-~人</option>
+                            #else
+                                <option value="5">1000-~人</option>
+                            #end
+                        </select>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">企業服務：</p>
+                        <p>
+                            <label style="display: inline"><input style="display: inline" type="checkbox" name="service" value="deliver" checked="checked">支持送貨到內地</label>
+                            <label style="display: inline"><input style="display: inline" type="checkbox" name="service" value="exports" checked="checked">可出口中國內地，建議買賣雙方自行了解報關手續</label>
+                            <label style="display: inline"><input style="display: inline" type="checkbox" name="service" value="agents" checked="checked">代理商</label>
+                            <label style="display: inline"><input style="display: inline" type="checkbox" name="service" value="manufacturer" checked="checked">生產商</label>
+                            <label style="display: inline"><input style="display: inline" type="checkbox" name="service" value="partners" checked="checked">尋找合作夥伴</label>
+                            <label style="display: inline"><input style="display: inline" type="checkbox" name="service" value="online" checked="checked">提供網購參考連結</label>
+                            #foreach($service in $!company.serviceList)
+                                #if($service.service == "deliver")
+                                    <script>document.getElementsByName("service")[0].checked="checked";</script>
+                                #elseif($service.service == "exports")
+                                    <script>document.getElementsByName("service")[1].checked="checked";</script>
+                                #elseif($service.service == "agents")
+                                    <script>document.getElementsByName("service")[2].checked="checked";</script>
+                                #elseif($service.service == "manufacturer")
+                                    <script>document.getElementsByName("service")[3].checked="checked";</script>
+                                #elseif($service.service == "partners")
+                                    <script>document.getElementsByName("service")[4].checked="checked";</script>
+                                #elseif($service.service == "online")
+                                    <script>document.getElementsByName("service")[5].checked="checked";</script>
+                                #end
+                            #end
+                        </p>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">聯系人：</p>
+                        <input id="contacts" type="text" value="$!company.contacts">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								聯系人選填
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">電話：</p>
+                        <input id="phone" type="text" value="$!company.phone">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								電話選填
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">傳真：</p>
+                        <input id="fax" type="text" value="$!company.fax">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								傳真選填
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">郵箱：</p>
+                        <input id="email" type="text" value="$!company.email">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								郵箱選填
+							</span>
+                    </li>
+##                    <li>
+##                        <p style=" width: 187px;">
+##                            <i class="require">*</i>
+##                            國家：
+##                        </p>
+##                        <input id="country" type="text" value="$!company.country">
+##                    </li>
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            國家：
+                        </p>
+
+                        <select id="country">
+                            <option value="" selected>選擇</option>
+                            #foreach($country in $!countries)
+                                #if($!company.country == $!country.nameCN)
+                                    <option value="$!country.nameCN" selected>$!country.nameCN</option>
+                                #else
+                                    <option value="$!country.nameCN">$!country.nameCN</option>
+                                #end
+                            #end
+                        </select>
+                    </li>
+
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            企業logo：
+                        </p>
+                        <input id="logo" class="small" type="text" name="imageSrc" value="$!company.logo" readonly>
+                        <div class="uploadImage">
+                            <input id="file_upload" name="file" type="file" multiple="true">
+                            <p>圖片上傳</p>
+                        </div>
+                        <div class="uploadImageBox">
+                            #if($company.logo)
+                                <img style="display: block" id="imageSrc" src="$!imgDomain$!company.logo">
+                            #else
+                                <img id="imageSrc" src="">
+                            #end
+                        </div>
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">&nbsp;</p>
+                        <button class="submit" id="mainBtn">保存</button>
+                        <button onclick="history.go(-1);">返回</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="child">
+                <ul>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            企業名稱(中文)：
+                        </p>
+                        <input id="nameCN" type="text" value="$!detailCN.name">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            企業業務(中文)：
+                        </p>
+                        <input id="businessCN" type="text" value="$!detailCN.business">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">&nbsp;</p>
+                        <button class="submit" id="cnBtn">保存</button>
+                        <button onclick="history.go(-1);">返回</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="child">
+                <ul>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            企業名稱(英文)：
+                        </p>
+                        <input id="nameEN" type="text" value="$!detailEN.name">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫英文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            企業業務(英文)：
+                        </p>
+                        <input id="businessEN" type="text" value="$!detailEN.business">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫英文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">&nbsp;</p>
+                        <button class="submit" id="enBtn">保存</button>
+                        <button onclick="history.go(-1);">返回</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="child">
+                <ul>
+                    <li>
+                        <p style=" width: 188px;">
+                            <i class="require">*</i>
+                            企業名稱(葡萄牙語)：
+                        </p>
+                        <input id="namePOR" type="text" value="$!detailPOR.name">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫葡萄牙語
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">
+                            <i class="require">*</i>
+                            企業業務(葡萄牙語)：
+                        </p>
+                        <input id="businessPOR" type="text" value="$!detailPOR.business">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫葡萄牙語
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">&nbsp;</p>
+                        <button class="submit" id="porBtn">保存</button>
+                        <button onclick="history.go(-1);">返回</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

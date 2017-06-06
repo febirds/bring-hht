@@ -1,0 +1,78 @@
+#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/inPage.css'>")
+#set($custom_js = "<script type='text/javascript' src='/js/globals.js'></script>
+                    <script type='text/javascript' src='/js/message.js'></script>")
+
+<div class="header">
+    <i class="fa fa-home"></i>
+    <p>首頁</p>
+    <p>»</p>
+    <p>留言管理</p>
+</div>
+<div class="content">
+    <div class="top">
+        <p>回復用戶留言</p>
+        <div class="menu">
+            <a href="/message" target="main">
+                <i class="fa fa-recycle"></i>
+                留言列表
+            </a>
+        </div>
+    </div>
+    <div class="tabBox">
+        <div class="menu">
+            <p></p>
+            <a class="current" href="javascript: void(0);">回復用戶留言</a>
+        </div>
+        <div class="tab">
+            <div class="child" style=" min-width: 900px;display: block">
+                <ul id="mainForm">
+                    <input type="hidden" id="id" value="$!message.id">
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            咨詢類型：
+                        </p>
+                        <select id="type" disabled>
+                            #if($!message.type == "LEGAL_CONSULTING")
+                                <option value="OTHER" selected>法律咨詢</option>
+                            #elseif($!message.type == "NEWS")
+                                <option value="OTHER" selected>會展咨詢</option>
+                            #elseif($!message.type == "SERVICE")
+                                <option value="OTHER" selected>專業服務供應商</option>
+                            #elseif($!message.type == "SERVICE")
+                                <option value="OTHER" selected>人才資料庫</option>
+                            #elseif($!message.type == "OTHER")
+                                <option value="OTHER" selected>其他</option>
+                            #end
+                        </select>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">名稱：</p>
+                        <input id="name" type="text" disabled value="$!message.name">
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">描述：</p>
+                        <textarea id="description" type="text" disabled>$!message.description</textarea>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">電話：</p>
+                        <input id="phone" type="text" disabled value="$!message.phone">
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">郵箱：</p>
+                        <input id="email" type="text" disabled value="$!message.email">
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">回復：</p>
+                        <textarea id="reply" type="text">$!message.reply</textarea>
+                    </li>
+                    <li>
+                        <p style=" width: 188px;">&nbsp;</p>
+                        <button class="submit" id="mainBtn">保存</button>
+                        <button onclick="history.go(-1);">返回</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

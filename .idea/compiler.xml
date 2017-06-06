@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bring-hht-boss" />
+        <module name="bring-hht-common" />
+        <module name="bring-hht-web" />
+        <module name="bringbuys-infonet-common" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="bring-hht" target="1.5" />
+      <module name="bring-hht-boss" target="1.8" />
+      <module name="bring-hht-common" target="1.8" />
+      <module name="bring-hht-web" target="1.8" />
+      <module name="bringbuys-infonet-common" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

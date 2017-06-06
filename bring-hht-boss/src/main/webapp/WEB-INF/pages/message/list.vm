@@ -1,0 +1,64 @@
+#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/inPage.css'>")
+#set($custom_js = "<script type='text/javascript' src='/js/globals.js'></script>")
+<div class="header">
+    <i class="fa fa-home"></i>
+    <a href="/" target="main">首页</a>
+    <p>»</p>
+    <p>留言管理</p>
+</div>
+<div class="content">
+    <div class="top">
+        <p>留言列表</p>
+        <div class="menu">
+            <a href="">
+                <i class="fa fa-recycle"></i>
+                留言列表
+            </a>
+        </div>
+    </div>
+    <div class="table">
+        <table>
+            <tr class="title">
+                <th class="tc">ID</th>
+                <th>名稱</th>
+                <th>類型</th>
+                <th>描述</th>
+                <th>用戶</th>
+                <th>企業</th>
+                <th>電話</th>
+                <th>郵箱</th>
+                <th>回復</th>
+                <th>操作</th>
+            </tr>
+            #foreach($message in $result)
+            <tr>
+                <td class="tc">$!message.id</td>
+                <td>$!message.name</td>
+                <td>
+                    #if($!message.type == 'LEGAL_CONSULTING')法律咨詢
+                    #elseif($!message.type == 'NEWS')會展咨詢
+                    #elseif($!message.type == 'SERVICE')專業服務供應商
+                    #elseif($!message.type == 'TALENT_DATABASE')人才資料庫
+                    #elseif($!message.type == 'OTHER')其他
+                    #end
+                </td>
+                <td>$!message.description</td>
+                <td>$!message.userId</td>
+                <td>$!message.companyId</td>
+                <td>$!message.phone</td>
+                <td>$!message.email</td>
+                <td>$!message.reply</td>
+                <td>
+                    <a href="/message/reply?id=$!message.id">修改</a>
+                </td>
+            </tr>
+            #end
+        </table>
+    </div>
+    <div style="text-align: center">
+        <ul class="pagination" data-page="$!pageNo" data-href="/message" data-total="$!totalCount">
+            <li class="disabled"><a href="#" class="prev" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+            <li><a href="#" class="next" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+        </ul>
+    </div>
+</div>

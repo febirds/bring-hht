@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="bring-hht-boss:war">
+    <output-path>$PROJECT_DIR$/bring-hht-boss/target</output-path>
+    <root id="archive" name="bringbuys-hht-boss.war">
+      <element id="artifact" artifact-name="bring-hht-boss:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util" 
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 读取集中配置文件，方便注解管理的bean使用配置值，可在被托管的bean中使用注解Value("bring-hht-web")方式注入 
+         但需要注意的是，SpringContext与SpringMVC的容器使用的不是同一套，必要时需要配置两份
+    -->
+    <!--    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <array>
+                <value>classpath:boss-configs.properties</value>
+            </array>
+        </property>
+    </bean>-->
+
+    <context:annotation-config/>
+    <context:component-scan base-package="gv.hht.interior.service"/>
+    <context:component-scan base-package="gv.hht.interior.biz"/>
+
+    <import resource="DataSource.xml"/>
+
+    <bean id="urlBrokerFactory" class="gv.hht.utils.uri.URLBrokerFactory" init-method="init" destroy-method="destroy">
+        <property name="urlConfigName" value="/url.xml"/>
+        <property name="modeConfigProperties" value="/url-mode.properties"/>
+        <property name="cycle" value="0"/>
+    </bean>
+    
+    <bean id="executorProvider" class="gv.hht.utils.taskdispatche.ExecutorProvider" init-method="init" destroy-method="destroy">
+        <constructor-arg index="0" value="3" />
+        <constructor-arg index="1" value="0" />
+    </bean>
+
+    <bean id="taskExecution" class="gv.hht.utils.taskdispatche.TaskExecution">
+        <constructor-arg index="0" ref="executorProvider"/>
+    </bean>
+
+    <bean id="propertiesHolder" class="gv.hht.utils.properties.Holder">
+        <property name="uploadPath" value="uploads" />
+        <property name="despatchDevmode" value="${despatch.devmode}" />
+    </bean>
+
+    <!-- 注入一些公共资源，如搜索相关的信息等 -->
+    <bean id="commonResourceHolder" class="gv.hht.utils.common.CommonResourceHolder">
+        <property name="sourceMap">
+            <map>
+                <entry key="domain.search.address" value="192.168.2.168"></entry>
+                <entry key="domain.search.port" value="9300"></entry>
+                <!--<entry key="company.name" value="${company.name}"></entry>-->
+                <entry key="company.name" value="新棱镜"></entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="redisCache" class="gv.hht.utils.cache.RedisCache">
+        <constructor-arg index="0">
+            <value>192.168.2.168:6379</value>
+        </constructor-arg>
+    </bean>
+</beans>

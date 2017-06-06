@@ -1,0 +1,22 @@
+#merchant{ background: #FFF;}
+.banner{ overflow: hidden; height: 213px; position: relative;}
+.banner p{ overflow: hidden; position: absolute; width: 100%; bottom: 0; color: #FFF; line-height: 20px; box-sizing: border-box; padding: 10px; background: rgba(0, 0, 0, 0.6); text-indent: 24px;}
+.map{ overflow: hidden; background: rgba(52,191,103,0.7); width: 48px; height: 48px; border-radius: 100%; text-align: center; position: fixed; bottom: 15px; right: 15px;}
+.map i{ color: #FFF; font-size: 12px; line-height: 48px;}
+.list{ overflow: hidden; margin-left: 10px;}
+.list>ul{ overflow: hidden;}			
+.list>ul>li{ overflow: hidden; border-bottom: 1px solid #bbb; padding: 10px 0;}
+.list>ul>li .left{ overflow: hidden; float: left; margin-right: 10px;}
+.list>ul>li .left .image{ overflow: hidden; width: 74px; height: 74px;}
+.list>ul>li .center{ overflow: hidden; float: left; width: 180px;}
+.list>ul>li .center>p{ overflow: hidden; font-size: 14px; line-height: 30px;}
+.list>ul>li .center .details{ overflow: hidden;}
+.list>ul>li .center .details ul{ overflow: hidden;}
+.list>ul>li .center .details ul li{ overflow: hidden; line-height: 20px;}
+.list>ul>li .center .details ul li p{ overflow: hidden; float: left; color: #666; margin-right: 5px;}
+.list>ul>li .center .details ul li a{ overflow: hidden; float: left; color: #666;}
+.list>ul>li .center .details ul li span{ overflow: hidden; color: #666;}
+.list>ul>li .right{ overflow: hidden; float: right; text-align: center; width: 40px; margin-top: 20px;}
+.list>ul>li .right p{ overflow: hidden; color: #34BF67; line-height: 20px;}
+.list>ul>li .right i{ color: #34BF67; display: block; margin-bottom: 5px;}
+.message{ overflow: hidden; color: #FFF; background: #34bf67; line-height: 30px; text-align: center;}

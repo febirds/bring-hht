@@ -1,0 +1,30 @@
+#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/inPage.css'>")
+#set($custom_js = "<script type='text/javascript' src='/js/globals.js'></script>")
+<div class="content">
+    <div class="table">
+        <a href="/conventionCategory/query" style="font-size: 14px;margin-bottom: 10px;">返回</a>
+        <table>
+            <tr class="title">
+                <th class="tc">ID</th>
+                <th>名稱</th>
+                <th>操作</th>
+            </tr>
+            #foreach($category in $result)
+            <tr>
+                <td class="tc">$!category.id</td>
+                <td>$!category.nameCN</td>
+                <td>
+                    <a name="selectItem" data-domid="#conventionCategoryId" data-domname="#conventionCategory" data-name="$!category.nameCN" data-id="$!category.id" href="javascript:void(0)">选择</a>
+
+                </td>
+            </tr>
+            #end
+        </table>
+    </div>
+    <div style="text-align: center">
+        <ul class="pagination" data-page="$!pageNo" data-href="/conventionCategory/query" data-total="$!totalCount">
+            <li class="disabled"><a href="#" class="prev" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+            <li><a href="#" class="next" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+        </ul>
+    </div>
+</div>

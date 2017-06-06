@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gv.hht.interior.mapper.account.AccountMapper">
+
+    <sql id="fields">
+        user_name, password, salt, failed_num, forbidden, status, create_time, update_time
+    </sql>
+    
+    <sql id="fields_id">
+        id, <include refid="fields"/>
+    </sql>
+
+    <sql id="table_name">account</sql>
+
+    <sql id="selector">
+        select <include refid="fields_id"/> from <include refid="table_name"/>
+    </sql>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        insert into <include refid="table_name"/>(<include refid="fields"/>)
+        values(#{userName}, #{password}, #{salt}, 0, 0, 0, now(), now())
+    </insert>
+
+    <update id="update">
+        update <include refid="table_name"/> 
+        <set>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="salt != null">
+                salt = #{salt},
+            </if>
+            <if test="failedNum != null">
+                failed_num = #{failedNum},
+            </if>
+            <if test="forbidden != null">
+                forbidden = #{forbidden}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="delete">
+        update <include refid="table_name"/> set status = 1 where id = #{id}
+    </update>
+
+    <select id="getById" resultType="gv.hht.model.account.Account">
+        <include refid="selector"/>
+        where id = #{id} and status = 0;
+    </select>
+
+    <select id="getBy" resultType="gv.hht.model.account.Account">
+        <include refid="selector"/>
+        <where>
+            status = 0
+            <if test="userName != null">and user_name=#{userName}</if>
+        </where>
+        limit 1;
+    </select>
+
+    <select id="countAll" resultType="int">
+        select count(1) from <include refid="table_name"/>
+        <where>
+            status = 0
+            <if test="userName != null">and user_name=#{userName}</if>
+        </where>
+    </select>
+
+    <select id="listByPage" resultType="gv.hht.model.account.Account">
+        <include refid="selector"/>
+        <where>
+            status = 0
+            <if test="model.userName != null">and user_name=#{model.userName}</if>
+        </where>
+        limit #{startRow}, #{pageSize};
+    </select>
+</mapper>

@@ -1,0 +1,2 @@
+.banner{ overflow: hidden; height: 213px; position: relative;}
+.banner p{ overflow: hidden; position: absolute; width: 100%; bottom: 0; color: #FFF; line-height: 20px; box-sizing: border-box; padding: 10px; background: rgba(0, 0, 0, 0.6); text-indent: 24px;}

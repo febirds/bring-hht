@@ -1,0 +1,19 @@
+.content{ overflow: hidden; overflow-y: auto; position: absolute; top: 0; bottom: 50px; width: 100%;}
+.content .banner{ overflow: hidden; height: 180px;}
+.content .link{ overflow: hidden; padding: 10px 0; background: #FFF;}
+.content .link a{ overflow: hidden; float: left; width: 20%; text-align: center;}
+.content .link a .image{ overflow: hidden; width: 25px; height: 25px; display: inline-block; padding: 5px;}
+.content .link a p{ overflow: hidden;color: #666;}
+.content .news{ overflow: hidden; background: #FFF; margin-top: 15px; padding: 0 10px;}
+.content .news .title{ overflow: hidden; text-align: center; padding: 15px 0;}
+.content .news .title p{ overflow: visible; height: 30px; border: solid 1px #666; display: inline-block; padding: 0 20px;}
+.content .news .title p span{ overflow: hidden; line-height: 30px; height: 35px; background: #FFF; font-size: 14px;}
+.content .news .title>span{ overflow: hidden; width: 20px; height: 20px; display: inline-block;}
+.content .news .list{ overflow: hidden;}
+.content .news .list a{ overflow: hidden; margin-bottom: 10px;}
+.content .news .list a p{ overflow: hidden; width: 100%; height: 206px; position: relative;}
+.content .news .list a span{ overflow: hidden; background: rgba(75, 55, 48, 0.4); width: 260px; position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto; color: #FFF; font-size: 20px; padding: 15px; box-sizing: border-box; border: solid 1px #FFF; border-radius: 10px 0 10px 0; text-align: center;}
+.menu{ overflow: hidden; height: 40px; background: #34BF67; position: absolute; bottom: 0; width: 100%; padding: 5px 0;}
+.menu a{ overflow: hidden; width: 50%; float: left; text-align: center; height: 100%;}
+.menu a i{ color: #FFF;}
+.menu a p{ overflow: hidden; color: #FFF; line-height: 20px;}

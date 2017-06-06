@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="error"> <!-- 用于设置log4j2自身内部的信息输出，可 以不设置，当设置成trace时，你会看到log4j2内部各种详细输出 -->
+    <appenders>
+
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout pattern="%d %p [%c] - %m%n" />
+        </Console>
+
+        <RollingFile name="PROJECT" fileName="D:\\Development/error.log"
+                     filePattern="D:\\Development/error.log-%d{MM-dd-yyyy}-%i.log.gz">
+            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout pattern="%d %p [%c] - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="500 MB" />
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="debuglog" fileName="D:\\Development/debug.log"
+                     filePattern="D:\\Development/debug.log-%d{MM-dd-yyyy}-%i.log.gz">
+            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout charset="UTF-8" pattern="%d %p [%c] - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="500 MB" />
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="sqldebuglog" fileName="D:\\Development/sql-debug.log"
+                     filePattern="D:\\Development/sql-debug.log-%d{MM-dd-yyyy}-%i.log.gz">
+            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout pattern="%d %p [%c] - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="500 MB" />
+            </Policies>
+        </RollingFile>
+
+    </appenders>
+
+    <loggers>
+        <root level="trace">
+            <appender-ref ref="CONSOLE" />
+        </root>
+
+        <logger name="druid.sql" level="trace" additivity="false">
+            <appender-ref ref="sqldebuglog" />
+        </logger>
+
+        <logger name="gv.infonet" level="trace" additivity="false">
+            <appender-ref ref="debuglog" />
+        </logger>
+    </loggers>
+</configuration>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="error"> <!-- 用于设置log4j2自身内部的信息输出，可 以不设置，当设置成trace时，你会看到log4j2内部各种详细输出 -->
+    <appenders>
+
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout pattern="%d %p [%c] - %m%n" />
+        </Console>
+
+        <RollingFile name="PROJECT" fileName="${loggingRoot}/error.log"
+                     filePattern="${loggingRoot}/error.log-%d{MM-dd-yyyy}-%i.log.gz">
+            <ThresholdFilter level="${global.level}" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout pattern="%d %p [%c] - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="500 MB" />
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="debuglog" fileName="${loggingRoot}/debug.log"
+                     filePattern="${loggingRoot}/debug.log-%d{MM-dd-yyyy}-%i.log.gz">
+            <ThresholdFilter level="${debug.level}" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout charset="UTF-8" pattern="%d %p [%c] - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="500 MB" />
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="sqldebuglog" fileName="${loggingRoot}/sql-debug.log"
+                     filePattern="${loggingRoot}/sql-debug.log-%d{MM-dd-yyyy}-%i.log.gz">
+            <ThresholdFilter level="${sqldebug.level}" onMatch="ACCEPT" onMismatch="DENY" />
+            <PatternLayout pattern="%d %p [%c] - %m%n" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="500 MB" />
+            </Policies>
+        </RollingFile>
+
+    </appenders>
+
+    <loggers>
+        <root level="${global.level}">
+            ${global.appender}
+        </root>
+
+        <logger name="druid.sql" level="${sqldebug.level}" additivity="false">
+            <appender-ref ref="sqldebuglog" />
+        </logger>
+
+        <logger name="gv.infonet" level="${debug.level}" additivity="false">
+            <appender-ref ref="debuglog" />
+        </logger>
+    </loggers>
+</configuration>

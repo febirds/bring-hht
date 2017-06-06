@@ -1,0 +1,8 @@
+#home{ background: #F3F3F4; font-family: "Microsoft Yahei",'Simsun',"Lucida Grande",Verdana,Lucida,Helvetica,Arial,sans-serif;}
+h1{ text-align: center; color: #e6e6e6; font-size: 120px; margin: 50px 0 10px 0; font-weight: normal;}
+h2{ text-align: center; color: #333; font-size: 20px; margin-bottom: 20px; font-weight: normal;}
+.login{ overflow: hidden;}
+.login ul{ overflow: hidden;}
+.login ul li{ overflow: hidden;}
+.login ul li .icon{ overflow: hidden;}
+.login ul li input{ overflow: hidden; line-height: 35px; background: #FAFFBD;}

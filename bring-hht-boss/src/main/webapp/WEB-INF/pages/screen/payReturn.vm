@@ -1,0 +1,2 @@
+#set($layout = "layout/emptyLayout.vm")##
+收到支付通知。

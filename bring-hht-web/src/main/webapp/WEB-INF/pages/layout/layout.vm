@@ -1,0 +1,26 @@
+<!-- 全局常量设置 -->
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>长广户户通</title>
+    <link rel="stylesheet" type="text/css" href="/css/mui.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/public.css">
+    $!custom_css
+    $!custom_head
+</head>
+
+<body>
+
+<!-- 内容页 -->
+    $!screen_content
+
+    <script type="text/javascript" src="/js/jQuery.js"></script>
+    <script type="text/javascript" src="/js/mui.min.js"></script>
+    $!custom_js
+    $!script_js
+</body>
+</html>
+
+
+

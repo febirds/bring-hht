@@ -1,0 +1,373 @@
+#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/inPage.css'>
+                    <link type='text/css' rel='stylesheet' href='/css/jquery-ui.css'>
+                    <link type='text/css' rel='stylesheet' href='/css/dropzone.min.css'>")
+#set($custom_js = "<script type='text/javascript' src='/js/jquery-ui.min.js'></script>
+                    <script type='text/javascript' src='/js/ueditor.config.js'></script>
+                    <script type='text/javascript' src='/js/ueditor.all.js'></script>
+                    <script type='text/javascript' src='/js/dropzone.js'></script>
+                    <script type='text/javascript' src='/js/ajaxfileupload.js'></script>
+                    <script type='text/javascript' src='/js/globals.js'></script>
+                    <script type='text/javascript' src='/js/convention.js'></script>")
+#set($script_js = "
+<script>
+    $(function () {
+        var contentCN_UE = UE.getEditor('descriptionCN');
+        var contentEN_UE = UE.getEditor('descriptionEN');
+        var contentPT_UE = UE.getEditor('descriptionPT');
+        contentCN_UE.addListener('ready', function () {
+            contentCN_UE.setContent('$!convention.descriptionCN');
+        })
+        contentEN_UE.addListener('ready', function () {
+            contentEN_UE.setContent('$!convention.descriptionEN');
+        })
+        contentPT_UE.addListener('ready', function () {
+            contentPT_UE.setContent('$!convention.descriptionPT');
+        })
+    })
+</script>
+")
+#set($url_s = "?x-oss-process=image/resize,m_fill,h_120,w_120")
+#set($domain = "http://m.platformchinaplp.mo")
+
+<div class="header">
+    <i class="fa fa-home"></i>
+    <a href="/" target="main">首页</a>
+    <p>»</p>
+    <p>展會信息</p>
+</div>
+<div class="content">
+    <div class="top">
+        <p>添加展會信息</p>
+        <div class="menu">
+            <a href="/convention/add" target="main">
+                <i class="fa fa-plus"></i>
+                添加展會
+            </a>
+            <a href="/convention" target="main">
+                <i class="fa fa-recycle"></i>
+                全部展會
+            </a>
+            <a href="/conventionApply">
+                <i class="fa fa-recycle"></i>
+                申請記錄列表
+            </a>
+        </div>
+    </div>
+    <div class="tabBox">
+        <div class="menu">
+            <p></p>
+            <a class="current" href="javascript: void(0);">基本信息</a>
+            <a href="javascript: void(0);">中文</a>
+            <a href="javascript: void(0);">英文</a>
+            <a href="javascript: void(0);">葡萄牙語</a>
+        </div>
+        <div class="tab">
+            <div class="child">
+                <ul id="mainForm">
+                    <input type="hidden" name="id" value="$!convention.id">
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            國家：
+                        </p>
+                        <select id="countryId" value="$!convention.countryId">
+                            #foreach($cou in $countries)
+                                <option value="$cou.id" $!cou.selected>$cou.nameCN</option>
+                            #end
+                        </select>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            類型：
+                        </p>
+                        <input type="text" id="conventionCategory" name="conventionCategory" value="$!convention.conventionCategoryName">
+                        <input type="hidden" id="conventionCategoryId" name="conventionCategoryId" value="$!convention.conventionCategoryId">
+                        <button id="selectCT">选择</button>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            開始時間：
+                        </p>
+                        <input name="startTime" type="date" value="$!startTime">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								必須選擇開始時間
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            結束時間：
+                        </p>
+                        <input name="endTime" type="date" value="$!endTime">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								必須選擇結束時間
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">
+                            郵箱：
+                        </p>
+                        <input type="text" name="email" value="$!convention.email">
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">
+                            電話：
+                        </p>
+                        <input type="text" name="phone" value="$!convention.phone">
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">
+                            網站：
+                        </p>
+                        <input type="text" name="website" value="$!convention.website">
+                    </li>
+                    <li>
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            是否顯示橫幅：
+                        </p>
+                        <select name="showBanner" value="$!convention.showBanner">
+                            <option value="0" #if($!convention.showBanner == 0) selected #end>否</option>
+                            <option value="1" #if($!convention.showBanner == 1) selected #end>是</option>
+                        </select>
+                    </li>
+                    #if($!convention.showBanner == 1)
+                        <li id="imageLi">
+                    #else
+                        <li id="imageLi" style="display: none">
+                    #end
+                        <p style=" width: 187px;">
+                            <i class="require">*</i>
+                            圖片：
+                        </p>
+                        <input type="hidden" name="bannerImage" value="$!convention.bannerImage">
+                        <form id="imageList" action="/Picture/upload" class="dropzone">
+                            <div class="fallback">
+                                <input name="file" type="file" multiple/>
+                            </div>
+                            <div class="dz-preview dz-processing dz-image-preview dz-success dz-complete">
+                                <div class="dz-image">
+                                #if ($!convention.bannerImage)
+                                    <img alt="$!convention.bannerImage" src="$!imgDomain$!convention.bannerImage$!url_s">
+                                #end
+                                </div>
+                                <div class="dz-details">
+                                    <div class="dz-filename"><span ></span></div>
+                                </div>
+                                <div class="dz-progress"><span class="dz-upload" style="width: 100%;"></span></div>
+                                <div class="dz-error-message"><span data-dz-errormessage=""></span></div>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="child">
+                <ul>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            名稱(中文)：
+                        </p>
+                        <input name="nameCN" type="text" value="$!convention.nameCN">
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            主辦方(中文)：
+                        </p>
+                        <input name="hostUnitCN" type="text" value="$!convention.hostUnitCN">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            承辦方(中文)：
+                        </p>
+                        <input name="takeUnitCN" type="text" value="$!convention.takeUnitCN">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            聯繫人(中文)：
+                        </p>
+                        <input name="contactsCN" type="text" value="$!convention.contactsCN">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            地址(中文)：
+                        </p>
+                        <input name="addressCN" type="text" value="$!convention.addressCN">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            描述(中文)：
+                        </p>
+                        <script id="descriptionCN" name="descriptionCN" type="text/plain" style="width:860px;height:500px; float: left; margin: 0 10px;"></script>
+							<span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫中文
+							</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="child">
+                                    <ul>
+                                    <li>
+                                    <p style=" width: 160px;">
+                                    <i class="require">*</i>
+                                    名稱(英文)：
+                            </p>
+                            <input name="nameEN" type="text" value="$!convention.nameEN">
+                                    <span>
+                                    <i class="fa fa-exclamation-circle yellow"></i>
+                                    請填寫英文
+                                    </span>
+                                    </li>
+                                    <li>
+                                    <p style=" width: 160px;">
+                                    主辦方(英文)：
+                            </p>
+                            <input name="hostUnitEN" type="text" value="$!convention.hostUnitEN">
+                                    <span>
+                                    <i class="fa fa-exclamation-circle yellow"></i>
+                                    請填寫中文
+                                    </span>
+                                    </li>
+                                    <li>
+                                    <p style=" width: 160px;">
+                                    承辦方(英文)：
+                            </p>
+                            <input name="takeUnitEN" type="text" value="$!convention.takeUnitEN">
+                                    <span>
+                                    <i class="fa fa-exclamation-circle yellow"></i>
+                                    請填寫英文
+                                    </span>
+                                    </li>
+                                    <li>
+                                    <p style=" width: 160px;">
+                                    聯繫人(英文)：
+                            </p>
+                            <input name="contactsEN" type="text" value="$!convention.contactsEN">
+                                    <span>
+                                    <i class="fa fa-exclamation-circle yellow"></i>
+                                    請填寫英文
+                                    </span>
+                                    </li>
+                                    <li>
+                                    <p style=" width: 160px;">
+                                    地址(英文)：
+                            </p>
+                            <input name="addressEN" type="text" value="$!convention.addressEN">
+                                    <span>
+                                    <i class="fa fa-exclamation-circle yellow"></i>
+                                    請填寫英文
+                                    </span>
+                                    </li>
+                                    <li>
+                                    <p style=" width: 160px;">
+                                    描述(英文)：
+                            </p>
+                            <script id="descriptionEN" name="descriptionEN" type="text/plain" style="width:860px;height:500px; float: left; margin: 0 10px;"></script>
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫英文
+							</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="child">
+                <ul>
+                    <li>
+                        <p style=" width: 160px;">
+                            <i class="require">*</i>
+                            名稱(葡文)：
+                        </p>
+                        <input name="namePT" type="text" value="$!convention.namePT">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫葡文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            主辦方(葡文)：
+                        </p>
+                        <input name="hostUnitPT" type="text" value="$!convention.hostUnitPT">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫葡文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            承辦方(中文)：
+                        </p>
+                        <input name="takeUnitPT" type="text" value="$!convention.takeUnitPT">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫葡文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            聯繫人(葡文)：
+                        </p>
+                        <input name="contactsPT" type="text" value="$!convention.contactsPT">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫葡文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            地址(葡文)：
+                        </p>
+                        <input name="addressPT" type="text" value="$!convention.addressPT">
+                        <span>
+								<i class="fa fa-exclamation-circle yellow"></i>
+								請填寫葡文
+							</span>
+                    </li>
+                    <li>
+                        <p style=" width: 160px;">
+                            描述(葡文)：
+                        </p>
+                        <script id="descriptionPT" name="descriptionPT" type="text/plain" style="width:860px;height:500px; float: left; margin: 0 10px;"></script>
+                        <span>
+                        <i class="fa fa-exclamation-circle yellow"></i>
+                                請填寫葡文
+                                </span>
+                                </li>
+                    <li>
+                        <p style=" width: 188px;">&nbsp;</p>
+                        <button class="submit" id="submit">保存</button>
+                        <button onclick="history.go(-1);">返回</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="dialogCT" title="添加类目">
+    <iframe src="/conventionCategory/query" width="680" height="420" style="display: none;border: 0"></iframe>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/inPage.css'>")
+#set($custom_js = "<script type='text/javascript' src='/js/globals.js'></script>")
+<div class="header">
+    <i class="fa fa-home"></i>
+    <a href="/" target="main">首页</a>
+    <p>»</p>
+    <p>企業管理</p>
+</div>
+<div class="content">
+    <div class="top">
+        <p>分類列表</p>
+        <div class="menu">
+            <a href="/conventionCategory/add" target="main">
+                <i class="fa fa-plus"></i>
+                添加類目
+            </a>
+            <a href="">
+                <i class="fa fa-recycle fa-backward"></i>
+                類目列表
+            </a>
+            <a href="/conventionCategory">
+                <i class="fa fa-backward"></i>
+                返回</a>
+        </div>
+    </div>
+    <div class="table">
+        <table>
+            <tr class="title">
+                <th class="tc" hidden>ID</th>
+                <th>名稱(中文)</th>
+                <th>名稱(英文)</th>
+                <th>名稱(葡文)</th>
+                <th>操作</th>
+            </tr>
+            #foreach($category in $result)
+            <tr>
+                <td class="tc" hidden>$!category.id</td>
+                <td>$!category.nameCN</td>
+                <td>$!category.nameEN</td>
+                <td>$!category.namePT</td>
+                <td>
+                    <a href="/conventionCategory/get?id=$!category.id">修改</a>
+                    <a class="delete" data-href="/category/delete?id=$!category.id" href="javascript:void(0)" target="_self">刪除</a>
+                </td>
+            </tr>
+            #end
+        </table>
+    </div>
+    <div style="text-align: center">
+        <ul class="pagination" data-page="$!pageNo" data-href="/category" data-total="$!totalCount">
+            <li class="disabled"><a href="#" class="prev" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+            <li><a href="#" class="next" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+        </ul>
+    </div>
+</div>

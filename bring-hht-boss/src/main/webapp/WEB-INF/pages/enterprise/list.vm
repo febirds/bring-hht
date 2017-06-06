@@ -1,0 +1,69 @@
+#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/inPage.css'>")
+#set($custom_js = "<script type='text/javascript' src='/js/globals.js'></script>")
+<div class="header">
+    <i class="fa fa-home"></i>
+    <a href="/" target="main">首页</a>
+    <p>»</p>
+    <p>企業管理</p>
+</div>
+<div class="content">
+    <div class="top">
+        <p>企業列表</p>
+        <div class="menu">
+            <a href="/enterprise/add" target="main">
+                <i class="fa fa-plus"></i>
+                添加企業
+            </a>
+            <a href="">
+                <i class="fa fa-recycle"></i>
+                企業列表
+            </a>
+        </div>
+    </div>
+    <div class="table">
+        <table>
+            <tr class="title">
+                <th class="tc">ID</th>
+                <th>名稱</th>
+                <th>企業類型</th>
+                <th>企業性質</th>
+                <th>僱傭人數</th>
+                <th>聯系人</th>
+                <th>電話</th>
+                <th>傳真</th>
+                <th>郵箱</th>
+                <th>操作</th>
+            </tr>
+            #foreach($company in $result)
+            <tr>
+                <td class="tc">$!company.id</td>
+                <td>$!company.name</td>
+                <td>$!company.type</td>
+                <td>$!company.nature</td>
+                <td>
+                    #if($!company.peopleNum == 1)0-50人
+                    #elseif($!company.peopleNum == 2)50-150人
+                    #elseif($!company.peopleNum == 3)150-500人
+                    #elseif($!company.peopleNum == 4)500-1000人
+                    #elseif($!company.peopleNum == 5)1000-~人
+                    #end
+                    </td>
+                <td>$!company.contacts</td>
+                <td>$!company.phone</td>
+                <td>$!company.fax</td>
+                <td>$!company.email</td>
+                <td>
+                    <a href="/enterprise/get?id=$!company.id">修改</a>
+                    <a class="delete" data-href="/enterprise/delete?id=$!company.id" href="javascript:void(0)" target="_self">刪除</a>
+                </td>
+            </tr>
+            #end
+        </table>
+    </div>
+    <div style="text-align: center">
+        <ul class="pagination" data-page="$!pageNo" data-href="/enterprise" data-total="$!totalCount">
+            <li class="disabled"><a href="#" class="prev" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+            <li><a href="#" class="next" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/backLogin.css'>")
+#set($custom_js = "<script type='text/javascript' src='/js/backLogin.js'></script>")
+<div class="title">
+    <p>Macao</p>
+    <span>歡迎使用萄语国家信息网</span>
+</div>
+<div class="login">
+    <form id="login-form">
+        <ul>
+            <li>
+                <div class="error">用户名或密码错误！</div>
+            </li>
+            <li>
+                <p>
+                    <i class="fa fa-user"></i>
+                </p>
+                <input name="userName" type="text" value="admin">
+            </li>
+            <li>
+                <p>
+                    <i class="fa fa-lock"></i>
+                </p>
+                <input name="password" type="password" value="">
+            </li>
+            <li>
+                <button type="submit">立即登錄</button>
+            </li>
+        </ul>
+    </form>
+</div>

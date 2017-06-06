@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlConfig>
+    <!-- 可以使用serverGroup来分组serverUrl，可以在url-mode.properties中配置切换使用哪个group -->
+    <!-- 同一个group下的serverUrl会被均匀使用 -->
+    <!-- 如果一个url下单个serverUrl与group同时存在，则忽略单个的serverUrl -->
+    <!--    
+         如果uri配置中的serverUrl没有分组，或者group没有命名，则放置在DEFAULT_MODE组下
+         url-mode.properties中可以使用 default 作为全局默认设置的key，如果没有设置一个group应使用的id，则默认使用default这个key设置的id
+         如果default这个key设置的id在group下没有对应的id，则使用DEFAULT_MODE组的设置
+    -->
+    <!-- 示例 -->
+    <!--    
+        <url name="BuyDomain1">
+            <serverUrl>1-1-1</serverUrl>
+        </url>
+
+        <url name="BuyDomain2">
+            <serverGroup>
+                <serverUrl>2-1-1</serverUrl>
+                <serverUrl>2-1-2</serverUrl>
+            </serverGroup>
+        </url>
+
+        <url name="BuyDomain6">
+            <serverGroup>
+                <serverUrl>6-1-1</serverUrl>
+                <serverUrl>6-1-2</serverUrl>
+            </serverGroup>
+            <serverGroup>
+                <id>x1</id>
+                <serverUrl>6-2-1</serverUrl>
+                <serverUrl>6-2-2</serverUrl>
+            </serverGroup>
+            <path>/login</path>
+        </url>
+    -->
+    
+    <url name="domain.assets">
+        <serverUrl>http://${domain.assets}</serverUrl>
+    </url>
+
+    <url name="map.api">
+        <serverUrl>${map.api}</serverUrl>
+    </url>
+
+    <url name="map.key">
+        <serverUrl>${map.key}</serverUrl>
+    </url>
+        
+    <url name="domain.home">
+        <serverUrl>http://${domain.home}</serverUrl>
+    </url>
+
+    <url name="aliyun.access.id">
+        <serverUrl>${aliyun.access.id}</serverUrl>
+    </url>
+
+    <url name="aliyun.access.key">
+        <serverUrl>${aliyun.access.key}</serverUrl>
+    </url>
+
+    <url name="aliyun.access.bucket">
+        <serverUrl>${aliyun.access.bucket}</serverUrl>
+    </url>
+
+    <url name="domain.session">
+        <serverUrl>${domain.session}</serverUrl>
+    </url>
+
+    <url name="b2cProductDomain">
+        <serverUrl>http://${b2c.domain.home}</serverUrl>
+    </url>
+    
+    <url name="domain.product.img">
+        <serverGroup>
+            <id>cloud</id>
+            <serverUrl>http://${domain.product.img.cloud1}</serverUrl>
+        </serverGroup>
+        <serverGroup>
+            <id>local</id>
+            <serverUrl>http://${domain.product.img.local1}</serverUrl>
+        </serverGroup>
+    </url>
+    
+    <url name="domain.upload.img">
+        <serverGroup>
+            <id>cloud</id>
+            <serverUrl>http://${domain.upload.img.cloud1}</serverUrl>
+        </serverGroup>
+        <serverGroup>
+            <id>local</id>
+            <serverUrl>http://${domain.upload.img.local1}</serverUrl>
+        </serverGroup>
+    </url>
+    
+</urlConfig>

@@ -1,0 +1,60 @@
+#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/inPage.css'>")
+#set($custom_js = "<script type='text/javascript' src='/js/globals.js'></script>")
+<div class="header">
+    <i class="fa fa-home"></i>
+    <a href="/" target="main">首页</a>
+    <p>»</p>
+    <p>屬性值管理</p>
+</div>
+<div class="content">
+    <div class="top">
+        <p>屬性值列表</p>
+        <div class="menu">
+            <a href="/value/add" target="main">
+                <i class="fa fa-plus"></i>
+                添加屬性值
+            </a>
+            <a href="">
+                <i class="fa fa-recycle"></i>
+                屬性值列表
+            </a>
+        </div>
+    </div>
+    <div class="table">
+        <table>
+            <tr class="title">
+                <th class="tc">ID</th>
+                <th>名稱(中文)</th>
+                <th>名稱(英文)</th>
+                <th>名稱(葡文)</th>
+                <th>圖片</th>
+                <th>操作</th>
+            </tr>
+            #foreach($value in $result)
+            <tr>
+                <td class="tc">$!value.id</td>
+                <td>$!value.nameCN</td>
+                <td>$!value.nameEN</td>
+                <td>$!value.namePT</td>
+                <td>
+                    #if($value.image)
+                        <img style="display: block" id="imageSrc" src="$!imgDomain$!value.image@100w_80Q">
+                    #else
+                        <img id="imageSrc" src="">
+                    #end
+                </td>
+                <td>
+                    <a href="/value/get?id=$!value.id">修改</a>
+                    <a class="delete" data-href="/value/delete?id=$!value.id" href="javascript:void(0)" target="_self">刪除</a>
+                </td>
+            </tr>
+            #end
+        </table>
+    </div>
+    <div style="text-align: center">
+        <ul class="pagination" data-page="$!pageNo" data-href="/value" data-total="$!totalCount">
+            <li class="disabled"><a href="#" class="prev" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+            <li><a href="#" class="next" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+        </ul>
+    </div>
+</div>

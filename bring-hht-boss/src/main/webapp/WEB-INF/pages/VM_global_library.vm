@@ -1,0 +1,25 @@
+#macro(custom_css $cssArray)
+  #foreach($css in $cssArray)
+     #if($!stringUtils.isNotBlank($css))
+         <link type="text/css" rel="stylesheet" href="$css" />
+     #end
+  #end
+#end 
+
+#macro(custom_js $jsArray)
+  #foreach($js in $jsArray)
+    #if($!stringUtils.isNotBlank($js))
+        <script type="text/javascript" src="$js"></script>
+    #end
+  #end
+#end
+
+#macro(custom_head $sArray)
+  #foreach($s in $sArray)
+    #if($!stringUtils.isNotBlank($s))
+        $s
+    #end
+  #end
+#end
+
+#####test

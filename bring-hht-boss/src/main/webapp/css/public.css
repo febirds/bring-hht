@@ -1,0 +1,791 @@
+*{ margin: 0; padding: 0; font-size: 12px; font-family: "Microsoft Yahei",'Simsun',"Lucida Grande",Verdana,Lucida,Helvetica,Arial,sans-serif;}
+html, body{ overflow: hidden; width: 100%; height: 100%; position: relative; margin: 0; padding: 0;}
+ul, li, p, a, input, button, select, font, span, label, textarea{ margin: 0; padding: 0; list-style-type: none; text-decoration: none; display: block; outline: none;}
+img{ border: 0;}
+i{ color: #666;}
+.responseImg{ overflow: hidden; position: relative;}
+.responseImg img{ overflow: hidden; position: absolute; max-width: 100%; max-height: 100%; left: 0; right: 0; top: 0; bottom: 0; margin: auto;}
+
+.qrcode-list {overflow: hidden;padding: 10px;border: 1px solid #ddd;margin-top:30px;min-width: 780px;}
+.qrcode-list li {width: 33.33%;float:left;text-align: center;}
+.qrcode-list li h3 {padding: 10px 0;font-size: 14px;}
+.qrcode-list li img {width: 240px;height: 240px;}
+.qrcode-list li textarea {padding: 5px;width: 90%;height: 40px;margin: 0 auto;border: 1px solid #ddd;resize : none;}
+.yellow {
+    color: #ec971f;
+}
+
+i.require {
+    overflow: hidden;
+    color: #F60;
+    font-family: serif;
+}
+
+.uploadify {
+    display: inline-block;
+}
+
+.uploadify-button {
+    border: none;
+    border-radius: 4px;
+    margin-top: -1px;
+    text-align: center;
+}
+
+.uploadify-button-text {
+    color: #FFF !important;
+    width: 100%;
+    margin: 0 !important;
+    line-height: 30px !important;
+}
+
+.uploadify-queue {
+    margin-left: 197px;
+}
+
+.uploadify-queue-item {
+    overflow: hidden;
+    padding: 0 10px;
+}
+
+.uploadify-queue-item .cancel a {
+    margin-top: 7px;
+}
+
+.uploadify-progress {
+    margin-bottom: 10px;
+    float: left;
+}
+
+.edui-default {
+    line-height: 28px;
+}
+
+div.edui-combox-body, div.edui-button-body, div.edui-splitbutton-body {
+    overflow: hidden;
+    height: 20px;
+}
+
+div.edui-box {
+    overflow: hidden;
+    height: 22px;
+}
+
+.edui-editor-bottomContainer {
+    display: none;
+}
+
+.header {
+    overflow: hidden;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #e5e5e5;
+    background: #f5f5f5;
+    padding: 0 10px;
+}
+
+.header i {
+    font-size: 18px;
+    color: #333;
+    float: left;
+    line-height: 40px;
+}
+
+.header a {
+    overflow: hidden;
+    float: left;
+    color: #428bca;
+    font-size: 14px;
+    margin: 0 5px;
+}
+
+.header a:hover {
+    text-decoration: underline;
+    color: #1963aa;
+}
+
+.header p {
+    overflow: hidden;
+    float: left;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.content {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 41px;
+    bottom: 0;
+    overflow-y: auto;
+}
+
+.content .top {
+    overflow: hidden;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.content .top p {
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 35px;
+}
+
+.content .top .menu {
+    overflow: hidden;
+}
+
+.content .top .menu a {
+    overflow: hidden;
+    color: #428bca;
+    font-size: 14px;
+    line-height: 25px;
+    margin-right: 20px;
+    float: left;
+}
+
+.content .top .menu a i {
+    color: #428bca;
+}
+
+.content .top .menu a:hover, .content .top .menu a:hover i {
+    color: #1963aa;
+}
+
+.content .top .menu a:hover {
+    color: #1963aa;
+    text-decoration: underline;
+}
+
+.content .top .error {
+    overflow: hidden;
+    background: #fcf8e3;
+    padding: 5px 10px;
+    border: 1px dashed #e5e5e5;
+    border-radius: 4px;
+    display: none;
+}
+
+.content .top .error span {
+    overflow: hidden;
+    line-height: 22px;
+    color: #666;
+}
+
+.content .table {
+    overflow: hidden;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 10px 20px;
+}
+
+.content .table table {
+    overflow: hidden;
+    border-collapse: collapse;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+}
+
+.content .table table tr {
+    overflow: hidden;
+}
+
+.content .table table tr:nth-child(2n - 1) {
+    overflow: hidden;
+    background: #EEE;
+}
+
+.content .table table tr th {
+    font-size: 14px;
+}
+
+.content .table table tr th, .content .table table tr td {
+    overflow: hidden;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #e1e1e1;
+    line-height: 35px;
+    padding: 5px;
+    color: #333;
+    font-weight: normal;
+    font-size: 14px;
+    text-align: left;
+}
+
+.content .table table tr td a {
+    overflow: hidden;
+    float: left;
+    color: #428bca;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.content .table table tr td a:hover {
+    color: #1963aa;
+    text-decoration: underline;
+}
+
+.content .table table .tc {
+    text-align: center;
+}
+
+.content .updatePass {
+    overflow: hidden;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.content .updatePass ul {
+    overflow: hidden;
+    border: 1px solid #eee;
+}
+
+.content .updatePass ul li {
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+}
+
+.content .updatePass ul li p {
+    overflow: hidden;
+    float: left;
+    padding: 5px 10px 5px 0;
+    width: 131px;
+    box-sizing: border-box;
+    border-right: 1px solid #eee;
+    height: 45px;
+    line-height: 35px;
+    text-align: right;
+    font-size: 14px;
+}
+
+.content .updatePass ul li .right {
+    overflow: hidden;
+    padding: 8px 10px;
+}
+
+.content .updatePass ul li .right input[type="password"] {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 26px;
+    width: 156px;
+    float: left;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-sizing: border-box;
+    padding: 0 5px;
+}
+
+.content .updatePass ul li .right span {
+    overflow: hidden;
+    float: left;
+    line-height: 26px;
+    margin-left: 10px;
+}
+
+.content .updatePass ul li .right button {
+    overflow: hidden;
+    float: left;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    width: 85px;
+    height: 25px;
+    border-radius: 4px;
+    color: #666;
+    margin: 1.5px 0;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.content .updatePass ul li .right button:hover {
+    background: #e6e6e6;
+}
+
+.content .updatePass ul li .right button.submit {
+    overflow: hidden;
+    background: #337ab7;
+    color: #FFF;
+    border: 1px solid #286090;
+}
+
+.content .updatePass ul li .right button.submit:hover {
+    background: #286090;
+}
+
+.content .tabBox {
+    overflow: hidden;
+    padding-top: 10px;
+}
+
+.content .tabBox .menu {
+    overflow: hidden;
+    padding: 0 20px 10px 20px;
+    border-bottom: 1px solid #e5e5e5;
+    position: relative;
+}
+
+.content .tabBox .menu p {
+    overflow: hidden;
+    height: 1px;
+    background: #ccc;
+    bottom: 10px;
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    z-index: -1;
+}
+
+.content .tabBox .menu a {
+    overflow: hidden;
+    background: #eee;
+    float: left;
+    text-align: center;
+    color: #666;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 4px 4px 0 0;
+    margin-right: 10px;
+    border: 1px solid transparent;
+    border-bottom-color: #ccc;
+    padding: 10px 20px;
+}
+
+.content .tabBox .menu a.current {
+    color: #337ab7;
+    border: 1px solid #ccc;
+    border-bottom-color: #eee;
+}
+
+.content .tabBox .tab {
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.content .tabBox .tab .child {
+    overflow: hidden;
+    padding: 20px;
+    background: #eee;
+    margin: 5px 20px;
+    display: none;
+}
+
+.content .tabBox .tab .child > ul {
+    overflow: hidden;
+}
+
+.content .tabBox .tab .child > ul > li {
+    overflow: hidden;
+    padding: 8px 0;
+}
+
+.content .tabBox .tab .child > ul > li p {
+    overflow: hidden;
+    float: left;
+    color: #333;
+    font-size: 14px;
+    line-height: 28px;
+    text-align: right;
+}
+
+.content .tabBox .tab .child > ul > li input[type="text"] {
+    overflow: hidden;
+    float: left;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 30px;
+    line-height: 30px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    margin: 0 10px;
+    width: 300px;
+    box-sizing: border-box;
+    padding: 0 5px;
+}
+
+.content .tabBox .tab .child > ul > li input[type="text"].small {
+    width: 300px;
+}
+
+.content .tabBox .tab .child > ul > li input[type="date"] {
+    overflow: hidden;
+    float: left;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 20px;
+    line-height: 20px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    margin: 3px 10px;
+    width: 135px;
+}
+
+.content .tabBox .tab .child > ul > li textarea {
+    overflow: hidden;
+    margin: 0 10px;
+    float: left;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    padding: 5px;
+    width: 288px;
+    height: 60px;
+}
+
+.content .tabBox .tab .child > ul > li select {
+    overflow: hidden;
+    line-height: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 10px;
+    float: left;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    width: 300px;
+}
+
+.content .tabBox .tab .child > ul > li button {
+    overflow: hidden;
+    height: 30px;
+    float: left;
+    margin-left: 10px;
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #666;
+    padding: 0 25px;
+    letter-spacing: 5px;
+    cursor: pointer;
+    line-height: 30px;
+}
+
+.content .tabBox .tab .child > ul > li button:hover {
+    background: #e6e6e6;
+}
+
+.content .tabBox .tab .child > ul > li button.submit {
+    overflow: hidden;
+    border-color: #286090;
+    background: #337ab7;
+    color: #FFF;
+}
+
+.content .tabBox .tab .child > ul > li button.submit:hover {
+    background: #286090;
+}
+
+.content .tabBox .tab .child > ul > li a {
+    overflow: hidden;
+    float: left;
+    color: #428bca;
+    line-height: 28px;
+}
+
+.content .tabBox .tab .child > ul > li span {
+    overflow: hidden;
+    color: #666;
+    float: left;
+    line-height: 28px;
+    margin-left: 10px;
+}
+
+.content .tabBox .tab .child > ul > li .uploadImage {
+    overflow: hidden;
+    background: #585858;
+    position: relative;
+    float: left;
+    width: 100px;
+    height: 26px;
+    line-height: 26px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.content .tabBox .tab .child > ul > li .uploadImage input[type="file"] {
+    overflow: hidden;
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.content .tabBox .tab .child > ul > li .uploadImage p {
+    overflow: hidden;
+    color: #FFF;
+    display: block;
+    width: 100%;
+    text-align: center;
+    line-height: 26px;
+    cursor: pointer;
+}
+
+.content .tabBox .tab .child > ul > li .uploadImageBox {
+    overflow: hidden;
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.content .tabBox .tab .child > ul > li .uploadImageBox img {
+    overflow: hidden;
+    width: 150px;
+    margin-left: 197px;
+    display: none;
+}
+
+.content .detail {
+    overflow: hidden;
+}
+
+.content .detail > ul {
+    overflow: hidden;
+    padding: 20px;
+}
+
+.content .detail > ul > li {
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.content .detail > ul > li .title {
+    overflow: hidden;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.content .detail > ul > li table {
+    overflow: hidden;
+    background: #EEEEEE;
+    border: 1px solid #e1e1e1;
+    border-width: 1px 0 0 1px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.content .detail > ul > li table tr {
+    overflow: hidden;
+    border-bottom: 1px solid #e1e1e1;
+    text-align: center;
+}
+
+.content .detail > ul > li table tr td {
+    overflow: hidden;
+    border-right: 1px solid #e1e1e1;
+    padding: 5px;
+}
+
+.content .detail > ul > li table tr td p {
+    overflow: hidden;
+    line-height: 35px;
+    font-size: 14px;
+    text-align: center;
+    float: left;
+    margin-right: 10px;
+}
+
+.content .detail > ul > li table tr td img.small {
+    overflow: hidden;
+    float: left;
+    max-height: 100px;
+    max-width: 350px;
+    margin-right: 30px;
+}
+
+.content .detail > ul > li table tr td a {
+    overflow: hidden;
+    line-height: 23px;
+    background: #f0f0f0;
+    float: left;
+    border: 1px solid #ccc;
+    padding: 0 10px 0 20px;
+    color: #666;
+    border-radius: 4px;
+    letter-spacing: 10px;
+    margin: 5px 0;
+}
+
+.content .detail > ul > li table tr td a:hover {
+    background: #e6e6e6;
+}
+
+.content .detail > ul > li table tr td:first-child {
+    width: 320px;
+}
+
+.content .detail > ul > li table tr td:first-child p {
+    width: 100%;
+}
+
+.content .detail > ul > li table tr td:first-child a {
+    background: #337ab7;
+    color: #FFF;
+    border-color: #286090;
+    margin-left: 111px;
+}
+
+.content .detail > ul > li table tr td:first-child a:hover {
+    background: #286090;
+}
+
+.pagination {
+    margin: 0
+}
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 0;
+    border-radius: 4px
+}
+
+.pagination > li {
+    display: inline
+}
+
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    color: #337ab7;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd
+}
+
+.pagination > li:first-child > a, .pagination > li:first-child > span {
+    margin-left: 0;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px
+}
+
+.pagination > li:last-child > a, .pagination > li:last-child > span {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px
+}
+
+.pagination > li > a:focus, .pagination > li > a:hover, .pagination > li > span:focus, .pagination > li > span:hover {
+    color: #23527c;
+    background-color: #eee;
+    border-color: #ddd
+}
+
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    z-index: 2;
+    color: #fff;
+    cursor: default;
+    background-color: #337ab7;
+    border-color: #337ab7
+}
+
+.pagination > .disabled > a, .pagination > .disabled > a:focus, .pagination > .disabled > a:hover, .pagination > .disabled > span, .pagination > .disabled > span:focus, .pagination > .disabled > span:hover {
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff;
+    border-color: #ddd
+}
+
+.pagination-lg > li > a, .pagination-lg > li > span {
+    padding: 10px 16px;
+    font-size: 18px
+}
+
+.pagination-lg > li:first-child > a, .pagination-lg > li:first-child > span {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px
+}
+
+.pagination-lg > li:last-child > a, .pagination-lg > li:last-child > span {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px
+}
+
+.pagination-sm > li > a, .pagination-sm > li > span {
+    padding: 5px 10px;
+    font-size: 12px
+}
+
+.pagination-sm > li:first-child > a, .pagination-sm > li:first-child > span {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px
+}
+
+.pagination-sm > li:last-child > a, .pagination-sm > li:last-child > span {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px
+}
+
+nav .pagination {
+    display: block
+}
+
+.pager {
+    padding-left: 0;
+    margin: 20px 0;
+    text-align: center;
+    list-style: none
+}
+
+.pager li {
+    display: inline
+}
+
+.pager li > a, .pager li > span {
+    display: inline-block;
+    padding: 5px 14px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 15px
+}
+
+.pager li > a:focus, .pager li > a:hover {
+    text-decoration: none;
+    background-color: #eee
+}
+
+.pager .next > a, .pager .next > span {
+    float: right
+}
+
+.pager .previous > a, .pager .previous > span {
+    float: left
+}
+
+.pager .disabled > a, .pager .disabled > a:focus, .pager .disabled > a:hover, .pager .disabled > span {
+    color: #777;
+    cursor: not-allowed;
+    background-color: #fff
+}
+
+.form-group {
+    margin-bottom: 15px
+}
+
+.form-group:last-child {
+    margin-bottom: 0
+}
+
+.form-group .form-control+.btn {
+    margin-left: -6px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0
+}
+
+.checkbox,.radio {
+    position: relative;
+    display: block
+}
+
+.inputbox .checkbox,.inputbox .radio {
+    display: inline-block
+}
+
+.input-group .btn:first-child,.input-group .form-control:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0
+}
+
+.input-group .btn:last-child,.input-group .form-control:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0
+}

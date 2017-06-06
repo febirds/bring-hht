@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="gv.hht.interior.mapper.repair.RepairOrderMapper">
+
+	<sql id="fields">
+		user_name,address,phone,description,status,create_time,update_time
+	</sql>
+
+	<sql id="fields_id">
+		id,<include refid="fields"/>
+	</sql>
+
+	<sql id="tablename">repair_order</sql>
+
+	<sql id="selector">
+		select <include refid="fields_id"/> from <include refid="tablename"/>
+	</sql>
+
+	<insert id="create" useGeneratedKeys="true" keyProperty="id">
+		insert into <include refid="tablename"/>(<include refid="fields"/>)
+		values(#{userName},#{address},#{phone},#{description},,0,now(),now());
+	</insert>
+
+	<select id="getById" resultType="gv.hht.model.repair.RepairOrder">
+		<include refid="selector"/> where id=#{id} and status=0 limit 1;
+	</select>
+
+	<select id="listByPage" resultType="gv.hht.model.repair.RepairOrder">
+		<include refid="selector"/>
+		<where>
+			status = 0
+			<if test="model.id != null">and id=#{model.id}</if>
+			<if test="model.userName != null">and user_name=#{model.userName}</if>
+		</where>
+		order by id desc limit #{startRow}, #{pageSize};
+	</select>
+
+	<select id="countAll" resultType="int">
+		select count(1) from <include refid="tablename"/>
+		<where>
+			status = 0
+			<if test="id != null">and id=#{id}</if>
+			<if test="userName != null">and user_name=#{userName}</if>
+		</where>
+	</select>
+
+	<update id="update">
+		update <include refid="tablename"/> 
+		<set>
+			<if test="userName != null">user_name= #{userName},</if>
+			<if test="description != null">description= #{description},</if>
+			update_time=now()
+		</set>
+		where id=#{id}
+	</update>
+
+	<update id="delete">
+		update <include refid="tablename"/> set status = 1 where id = #{id}
+	</update>
+</mapper>

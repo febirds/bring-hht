@@ -1,0 +1,50 @@
+@media screen and (min-width: 321px) and (max-width: 375px) {
+    html {
+        font-size: 13px; } }
+@media screen and (min-width: 376px) and (max-width: 414px) {
+    html {
+        font-size: 14px; } }
+@media screen and (min-width: 415px) and (max-width: 639px) {
+    html {
+        font-size: 17px; } }
+@media screen and (min-width: 640px) and (max-width: 719px) {
+    html {
+        font-size: 20px; } }
+@media screen and (min-width: 720px) and (max-width: 749px) {
+    html {
+        font-size: 22.5px; } }
+@media screen and (min-width: 750px) and (max-width: 799px) {
+    html {
+        font-size: 23.5px; } }
+@media screen and (min-width: 800px) {
+    html {
+        font-size: 25px; } }
+body {
+    /* max-width: 640px; */
+    min-width: 320px;
+    margin: 0 auto;
+    background-color: #f0f0f7; }
+p{word-break:break-all;}
+b {
+    font-weight: bold; }
+input::-webkit-input-placeholder{color:#fff;}
+input:focus::-webkit-input-placeholder{color:#EEEEEE;}
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('../iconfont/ux_1472547654_3766642/iconfont.eot'); /* IE9*/
+    src: url('../iconfont/ux_1472547654_3766642/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../iconfont/ux_1472547654_3766642/iconfont.woff') format('woff'), /* chrome、firefox */
+    url('../iconfont/ux_1472547654_3766642/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('../iconfont/ux_1472547654_3766642/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+
+.iconfont{
+    font-family:"iconfont";
+    font-size:1.4223rem;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
