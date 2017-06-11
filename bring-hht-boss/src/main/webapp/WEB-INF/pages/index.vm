@@ -2,7 +2,7 @@
 #set($custom_js = "<script type='text/javascript' src='/js/backHome.js'></script>")
 
 <div class="header">
-    <div class="logo">信息網後台管理</div>
+    <div class="logo">长广户户通後台管理</div>
     <div class="menu">
         <a href="/" target="_blank">首頁</a>
         #*<a href="/admin/intelligence.html" class="mananger" target="main">管理頁</a>*#
@@ -22,20 +22,16 @@
             <li>
                 <div class="title">
                     <i class="fa fa-fw fa-clipboard"></i>
-                    企業管理
+                    报修单
                 </div>
                 <div class="child">
-                    <a href="/enterprise/add" target="main">
+                    <a href="/repair" target="main">
                         <i class="fa fa-fw fa-plus-square"></i>
-                        添加企業
-                    </a>
-                    <a href="/enterprise" target="main">
-                        <i class="fa fa-fw fa-list-ul"></i>
-                        企業列表
+                        报修单列表
                     </a>
                 </div>
             </li>
-            <li>
+            #*<li>
                 <div class="title">
                     <i class="fa fa-fw fa-clipboard"></i>
                     类目管理
@@ -142,16 +138,15 @@
                         用户列表
                     </a>
                 </div>
-            </li>
+            </li>*#
         </ul>
     </div>
     <div class="right">
         <div class="iframe">
-            <iframe src="/enterprise" frameborder="0" width="100%" height="100%" name="main"></iframe>
+            <iframe src="/repair" frameborder="0" width="100%" height="100%" name="main"></iframe>
         </div>
         <div class="footer">
             <p>CopyRight © 2015. Powered By</p>
-            <a href="">澳門貿易投資促進局</a>
         </div>
     </div>
 </div>

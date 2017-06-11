@@ -1,157 +1,25 @@
-#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/backHome.css'>")
-#set($custom_js = "<script type='text/javascript' src='/js/backHome.js'></script>")
-
-<div class="header">
-    <div class="logo">信息網後台管理</div>
-    <div class="menu">
-        <a href="/" target="_blank">首頁</a>
-        #*<a href="/admin/intelligence.html" class="mananger" target="main">管理頁</a>*#
-    </div>
-    <div class="user">
-        <p>管理员：</p>
-        <span>Admin</span>
-        <div class="link">
-            #*<a href="/admin/updatePassword.html" target="main">修改密碼</a>*#
-            <a class="exit" href="javascript:;">退出</a>
+#set($custom_js = "<script type='text/javascript' src='/js/repair.js'></script>")
+<div class="mui-content">
+    <form id="repairForm" class="mui-input-group">
+        <div class="mui-row">
+            <h4 style="text-align: center">长广户户通</h4>
+            <h4 style="text-align: center">客户故障网络报修</h4>
         </div>
-    </div>
-</div>
-<div class="content">
-    <div class="list">
-        <ul>
-            <li>
-                <div class="title">
-                    <i class="fa fa-fw fa-clipboard"></i>
-                    企業管理
-                </div>
-                <div class="child">
-                    <a href="/enterprise/add" target="main">
-                        <i class="fa fa-fw fa-plus-square"></i>
-                        添加企業
-                    </a>
-                    <a href="/enterprise" target="main">
-                        <i class="fa fa-fw fa-list-ul"></i>
-                        企業列表
-                    </a>
-                </div>
-            </li>
-            <li>
-                <div class="title">
-                    <i class="fa fa-fw fa-clipboard"></i>
-                    类目管理
-                </div>
-                <div class="child">
-                    <a href="/category/add" target="main">
-                        <i class="fa fa-fw fa-plus-square"></i>
-                        添加类目
-                    </a>
-                    <a href="/category" target="main">
-                        <i class="fa fa-fw fa-list-ul"></i>
-                        类目列表
-                    </a>
-                </div>
-            </li>
-            <li>
-                <div class="title">
-                    <i class="fa fa-fw fa-clipboard"></i>
-                    商品管理
-                </div>
-                <div class="child">
-                    <a href="/product/add" target="main">
-                        <i class="fa fa-fw fa-plus-square"></i>
-                        添加商品
-                    </a>
-                    <a href="/product" target="main">
-                        <i class="fa fa-fw fa-list-ul"></i>
-                        商品列表
-                    </a>
-                </div>
-            </li>
-            <li>
-                <div class="title">
-                    <i class="fa fa-fw fa-clipboard"></i>
-                    經貿信息
-                </div>
-                <div class="child">
-                    <a href="/article/add" target="main">
-                        <i class="fa fa-fw fa-plus-square"></i>
-                        添加文章
-                    </a>
-                    <a href="/article" target="main">
-                        <i class="fa fa-fw fa-list-ul"></i>
-                        文章列表
-                    </a>
-                </div>
-            </li>
-            <li>
-                <div class="title">
-                    <i class="fa fa-fw fa-clipboard"></i>
-                    展會类目
-                </div>
-                <div class="child">
-                    <a href="/conventionCategory/add" target="main">
-                        <i class="fa fa-fw fa-plus-square"></i>
-                        添加展會类目
-                    </a>
-                    <a href="/conventionCategory" target="main">
-                        <i class="fa fa-fw fa-list-ul"></i>
-                        展會类目列表
-                    </a>
-                </div>
-            </li>
-            <li>
-                <div class="title">
-                    <i class="fa fa-fw fa-clipboard"></i>
-                    展會信息
-                </div>
-                <div class="child">
-                    <a href="/convention/add" target="main">
-                        <i class="fa fa-fw fa-plus-square"></i>
-                        添加展會
-                    </a>
-                    <a href="/convention" target="main">
-                        <i class="fa fa-fw fa-list-ul"></i>
-                        展會列表
-                    </a>
-                    <a href="/conventionApply" target="main">
-                        <i class="fa fa-fw fa-list-ul"></i>
-                        申請記錄列表
-                    </a>
-                </div>
-            </li>
-            <li>
-                <div class="title">
-                    <i class="fa fa-fw fa-clipboard"></i>
-                    留言管理
-                </div>
-                <div class="child">
-                    <a href="/message" target="main">
-                        <i class="fa fa-fw fa-plus-square"></i>
-                        留言列表
-                    </a>
-                </div>
-            </li>
-            <li>
-                <div class="title">
-                    <i class="fa fa-fw fa-clipboard"></i>
-                    用户管理
-                </div>
-                <div class="child">
-                    <a href="/user" target="main">
-                        <i class="fa fa-fw fa-plus-square"></i>
-                        用户列表
-                    </a>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="right">
-        <div class="iframe">
-            <iframe src="/enterprise" frameborder="0" width="100%" height="100%" name="main"></iframe>
+        <div class="mui-input-row">
+            <input type="text" name="userName" class="mui-input-clear" placeholder="姓名">
         </div>
-        <div class="footer">
-            <p>CopyRight © 2015. Powered By</p>
-            <a href="">澳門貿易投資促進局</a>
+        <div class="mui-input-row">
+            <input type="text" name="address" class="mui-input-clear" placeholder="地址">
         </div>
-    </div>
+        <div class="mui-input-row">
+            <input type="text" name="phone" class="mui-input-clear" placeholder="联系电话">
+        </div>
+        <div style="height: auto" class="mui-input-row">
+            <textarea name="description" class="mui-input-clear" rows="3" placeholder="故障现象"></textarea>
+        </div>
+        <div class="mui-button-row">
+            <button type="button" id="submit" class="mui-btn mui-btn-primary">提交</button>
+            <button type="button" id="cancel" class="mui-btn mui-btn-danger">取消</button>
+        </div>
+    </form>
 </div>

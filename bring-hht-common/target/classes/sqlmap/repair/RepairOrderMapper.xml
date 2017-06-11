@@ -18,7 +18,7 @@
 
 	<insert id="create" useGeneratedKeys="true" keyProperty="id">
 		insert into <include refid="tablename"/>(<include refid="fields"/>)
-		values(#{userName},#{address},#{phone},#{description},,0,now(),now());
+		values(#{userName},#{address},#{phone},#{description},0,now(),now());
 	</insert>
 
 	<select id="getById" resultType="gv.hht.model.repair.RepairOrder">

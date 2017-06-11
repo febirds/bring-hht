@@ -1,0 +1,73 @@
+#set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/inPage.css'>")
+#set($custom_js = "<script type='text/javascript' src='/js/jquery-ui.min.js'></script>
+                    <script type='text/javascript' src='/js/globals.js'></script>")
+#set($script_js = "
+<script>
+    $(function () {
+        $('#search').on('click', function () {
+            var userName = $('#userName').val() || ''
+            window.location.href = '/repair?userName='+userName
+        })
+    })
+</script>
+")
+<div class="header">
+    <i class="fa fa-home"></i>
+    <a href="/" target="main">首页</a>
+    <p>»</p>
+    <p>报修单</p>
+</div>
+<div class="content">
+    <div class="top">
+        <p>报修单列表</p>
+        <div class="menu">
+            <a href="/repair">
+                <i class="fa fa-recycle"></i>
+                报修单列表
+            </a>
+            <input  type="text" id="userName" placeholder="用户名称" class="form-control" value="$!{key}" style="float: left;padding: 2px 10px;">
+            <a id="search" href="javascript:;" class="btn" style="padding: 0 10px;margin-left: 10px;line-height: 22px;border: 1px solid #ddd;">
+                搜索
+            </a>
+        </div>
+    </div>
+    <div class="table">
+        <table>
+            <tr class="title">
+                <th class="tc">ID</th>
+                <th>用户名</th>
+                <th>地址</th>
+                <th>联系电话</th>
+                <th>故障现象</th>
+                <th>时间</th>
+            </tr>
+            #foreach($repair in $result)
+            <tr>
+                <td class="tc">$!repair.id</td>
+                <td>$!repair.userName</td>
+                <td>$!repair.address</td>
+                <td>$!repair.phone</td>
+                <td>$!repair.description</td>
+                <td>$DateUtils.formatDate($!repair.createTime)</td>
+            </tr>
+            #end
+        </table>
+    </div>
+    <div style="text-align: center">
+        <ul class="pagination" data-page="$!pageNo" data-href="/repair" data-total="$!totalCount">
+            <li class="disabled"><a href="#" class="prev" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+            <li><a href="#" class="next" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+        </ul>
+        <div style="display: inline-block" class="form-group">
+            <div style="float: left;margin-bottom: 1px;line-height: 30px">转到</div>
+            <div style="float: left;" class="gopage">
+                <div class="input-group form-inline form-group">
+                    <input type="text" class="form-control pageno" placeholder="" style="width:75px">
+                </div>
+            </div>
+            <span style="float: left;" class="input-group-btn">
+                    <button class="btn btn-default pagego" data-href="/repair" type="button">Go!</button>
+            </span>
+        </div>
+    </div>
+</div>

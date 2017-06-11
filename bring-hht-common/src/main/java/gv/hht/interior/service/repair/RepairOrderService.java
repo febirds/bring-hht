@@ -4,6 +4,7 @@ import gv.hht.interior.mapper.BaseMapper;
 import gv.hht.interior.mapper.repair.RepairOrderMapper;
 import gv.hht.interior.service.BaseService;
 import gv.hht.model.repair.RepairOrder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RepairOrderService extends BaseService<RepairOrder> {
 
+    @Autowired
     private RepairOrderMapper mapper;
 
     @Override
