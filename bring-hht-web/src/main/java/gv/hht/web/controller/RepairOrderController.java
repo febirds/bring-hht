@@ -10,21 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-/**
- *
- * @author Runshine
- * @since 2015-6-23
- * @version 1.0.0
- *
- */
 @Controller
-@RequestMapping(value = "/RepairOrder")
 public class RepairOrderController extends BaseController {
     @Autowired
     private RepairOrderService service;
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping("/repair")
+    public String index() {
+        return "repair/add";
+    }
+
+    @RequestMapping(value = "/RepairOrder", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult create(RepairOrder repairOrder) {
         service.create(repairOrder);

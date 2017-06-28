@@ -1,0 +1,19 @@
+#set($custom_js = "<script type='text/javascript' src='/js/queryProduct.js'></script>")
+<div class="mui-content">
+    <form id="queryForm" class="mui-input-group">
+        <div class="mui-row">
+            <h4 style="text-align: center">长广户户通</h4>
+            <h4 style="text-align: center">客户查询</h4>
+        </div>
+        <div class="mui-input-row">
+            <input type="text" name="userName" class="mui-input-clear" placeholder="姓名">
+        </div>
+        <div class="mui-input-row">
+            <input type="text" name="userName" class="mui-input-clear" placeholder="卡号">
+        </div>
+        <div class="mui-button-row">
+            <button type="button" id="submit" class="mui-btn mui-btn-primary">提交</button>
+            <button type="button" id="cancel" class="mui-btn mui-btn-danger">取消</button>
+        </div>
+    </form>
+</div>
