@@ -1,42 +1,42 @@
 #set($custom_js = "<script type='text/javascript' src='/js/queryProduct.js'></script>")
-<div class="mui-content">
+<div style="background: #fff" class="mui-content">
     <div class="mui-row">
-        <div class="mui-col-sm-3 mui-col-xs-2">
-            <li class="mui-table-view-cell">
+        <div style="width: 17.66%" class="mui-col-sm-3 mui-col-xs-2">
+            <div class="mui-table-view-cell">
                 姓名
-            </li>
+            </div>
         </div>
         <div class="mui-col-sm-5 mui-col-xs-5">
-            <li class="mui-table-view-cell">
+            <div class="mui-table-view-cell">
                 智能卡号
-            </li>
+            </div>
         </div>
         <div class="mui-col-sm-4 mui-col-xs-4">
-            <li class="mui-table-view-cell">
+            <div class="mui-table-view-cell">
                 产品期限
-            </li>
+            </div>
         </div>
     </div>
     #if ($result)
     #foreach($product in $result)
         <div class="mui-row">
-            <div class="mui-col-sm-3 mui-col-xs-2">
-                <li class="mui-table-view-cell">
+            <div style="width: 17.66%" class="mui-col-sm-3 mui-col-xs-2">
+                <div class="mui-table-view-cell">
                     $!product.userName
-                </li>
+                </div>
             </div>
             <div class="mui-col-sm-5 mui-col-xs-5">
-                <li class="mui-table-view-cell">
+                <div class="mui-table-view-cell">
                     $!product.cardno
-                </li>
+                </div>
             </div>
             <div class="mui-col-sm-4 mui-col-xs-4">
-                <li class="mui-table-view-cell">
+                <div class="mui-table-view-cell">
                     <script>
                         var d = '$!product.eDate';
                         document.write(d.substring(0, 4)+'年'+d.substring(5, 7)+'日');
                     </script>
-                </li>
+                </div>
             </div>
         </div>
     #end
