@@ -1,8 +1,8 @@
 #set($custom_css = "<link type='text/css' rel='stylesheet' href='/css/backLogin.css'>")
 #set($custom_js = "<script type='text/javascript' src='/js/backLogin.js'></script>")
 <div class="title">
-    <p>Macao</p>
-    <span>歡迎使用萄语国家信息网</span>
+    <p>CGHHT</p>
+    <span>歡迎使用长广户户通</span>
 </div>
 <div class="login">
     <form id="login-form">
