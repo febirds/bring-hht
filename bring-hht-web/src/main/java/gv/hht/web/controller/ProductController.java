@@ -1,10 +1,7 @@
 package gv.hht.web.controller;
 
 import gv.hht.utils.json.JsonResult;
-import gv.hht.web.ws.CalculatorDelegate;
-import gv.hht.web.ws.CalculatorServiceLocator;
-import gv.hht.web.ws.UserCardCtmCardRltVo;
-import gv.hht.web.ws.UserPdtOrderChgVo;
+import gv.hht.web.ws.*;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -14,8 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by wanp on 17-6-16.
@@ -42,9 +38,18 @@ public class ProductController {
             UserPdtOrderChgVo[] uvos = new UserPdtOrderChgVo[]{};
             if (vos.length>0 && vos[0] != null && vos[0].getCtmCard() != null) {
                 uvos = service.getUserPdtOrderChgAll(vos[0].getCtmCard(), cardNo);
+                Arrays.sort(uvos, new UserPdtOrderChgVoComparator());
+            }
+            List<String> cardNos = new ArrayList<String>();
+            List<UserPdtOrderChgVo> list = new ArrayList<UserPdtOrderChgVo>();
+            for (UserPdtOrderChgVo vo: uvos) {
+                if (!cardNos.contains(vo.getCardno())) {
+                    list.add(vo);
+                    cardNos.add(vo.getCardno());
+                }
             }
             map.put("success", true);
-            map.put("result", uvos);
+            map.put("result", list);
         } catch (javax.xml.rpc.ServiceException ex) {
             ex.printStackTrace();
         } catch (java.rmi.RemoteException ex) {
