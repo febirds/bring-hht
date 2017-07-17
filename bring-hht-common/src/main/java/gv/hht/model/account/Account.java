@@ -21,7 +21,7 @@ import gv.hht.model.BaseModel;
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-INSERT INTO `cghht`.`account` (`id`, `user_name`, `password`, `salt`, `failed_num`, `forbidden`, `status`, `create_time`, `update_time`) VALUES ('1', 'admin', '303a443a6c95c323f824a7552b7364c2', '388bf610-594f-40a0-87a7-282a07ad4be9', '0', '0', '0', '1970-01-01 00:00:00', '1970-01-01 00:00:00');
+INSERT INTO `cghht`.`account` (`id`, `user_name`, `password`, `salt`, `failed_num`, `forbidden`, `status`, `create_time`, `update_time`) VALUES ('1', 'admin', 'a82d576c93321d43a2f497b7de723350', '388bf610-594f-40a0-87a7-282a07ad4be9', '0', '0', '0', '1970-01-01 00:00:00', '1970-01-01 00:00:00');
 
  *
  */
