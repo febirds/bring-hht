@@ -1,45 +1,21 @@
 #set($custom_js = "<script type='text/javascript' src='/js/queryProduct.js'></script>")
 <div style="background: #fff" class="mui-content">
-    <div class="mui-row">
-        <div style="width: 17.66%" class="mui-col-sm-3 mui-col-xs-2">
-            <div class="mui-table-view-cell">
-                姓名
-            </div>
-        </div>
-        <div class="mui-col-sm-5 mui-col-xs-5">
-            <div class="mui-table-view-cell">
-                智能卡号
-            </div>
-        </div>
-        <div class="mui-col-sm-4 mui-col-xs-4">
-            <div class="mui-table-view-cell">
-                产品期限
-            </div>
-        </div>
-    </div>
     #if ($result)
-    #foreach($product in $result)
-        <div class="mui-row">
-            <div style="width: 17.66%" class="mui-col-sm-3 mui-col-xs-2">
-                <div class="mui-table-view-cell">
-                    $!product.userName
-                </div>
-            </div>
-            <div class="mui-col-sm-5 mui-col-xs-5">
-                <div class="mui-table-view-cell">
-                    $!product.cardno
-                </div>
-            </div>
-            <div class="mui-col-sm-4 mui-col-xs-4">
-                <div class="mui-table-view-cell">
-                    <script>
-                        var d = '$!product.eDate';
-                        document.write(d.substring(0, 4)+'年'+d.substring(5, 7)+'日');
-                    </script>
-                </div>
-            </div>
-        </div>
-    #end
+        <ul class="mui-table-view">
+            #foreach($product in $result)
+            <li style="font-weight: bold" class="mui-table-view-cell">姓名</li>
+            <li class="mui-table-view-cell">$!product.userName</li>
+            <li style="font-weight: bold" class="mui-table-view-cell">智能卡号</li>
+            <li class="mui-table-view-cell">$!product.cardno</li>
+            <li style="font-weight: bold" class="mui-table-view-cell">产品期限</li>
+            <li class="mui-table-view-cell">
+                <script>
+                    var d = '$!product.eDate';
+                    document.write(d.substring(0, 4)+'年'+d.substring(5, 7)+'日');
+                </script>
+            </li>
+            #end
+        </ul>
     #else
         查无记录
     #end
