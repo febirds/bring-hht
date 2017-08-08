@@ -4,14 +4,14 @@
         <ul class="mui-table-view">
             #foreach($product in $result)
             <li style="font-weight: bold" class="mui-table-view-cell">姓名</li>
-            <li class="mui-table-view-cell">$!product.userName</li>
+            <li class="mui-table-view-cell">$!product.opName</li>
             <li style="font-weight: bold" class="mui-table-view-cell">智能卡号</li>
             <li class="mui-table-view-cell">$!product.cardno</li>
             <li style="font-weight: bold" class="mui-table-view-cell">产品期限</li>
             <li class="mui-table-view-cell">
                 <script>
                     var d = '$!product.eDate';
-                    document.write(d.substring(0, 4)+'年'+d.substring(5, 7)+'日');
+                    document.write(d.substring(0, 4)+'年'+d.substring(5, 7)+'月'+d.substring(8, 10) + '日');
                 </script>
             </li>
             #end
