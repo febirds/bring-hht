@@ -36,7 +36,7 @@ public class ProductController {
             CalculatorDelegate service = locator.getCalculatorPort();
             UserCardCtmCardRltVo[] vos = service.getUserCardCtmCardAll(cardNo);
             UserPdtOrderChgVo[] uvos = new UserPdtOrderChgVo[]{};
-            if (vos.length>0 && vos[0] != null && vos[0].getCtmCard() != null) {
+            if (vos != null && vos.length>0 && vos[0] != null && vos[0].getCtmCard() != null) {
                 uvos = service.getUserPdtOrderChgAll(vos[0].getCtmCard(), cardNo);
                 Arrays.sort(uvos, new UserPdtOrderChgVoComparator());
             }
