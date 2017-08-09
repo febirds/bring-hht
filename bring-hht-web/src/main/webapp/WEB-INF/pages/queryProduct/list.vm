@@ -4,7 +4,7 @@
         <ul class="mui-table-view">
             #foreach($product in $result)
             <li style="font-weight: bold" class="mui-table-view-cell">姓名</li>
-            <li class="mui-table-view-cell">$!product.opName</li>
+            <li class="mui-table-view-cell">$!product.userName</li>
             <li style="font-weight: bold" class="mui-table-view-cell">智能卡号</li>
             <li class="mui-table-view-cell">$!product.cardno</li>
             <li style="font-weight: bold" class="mui-table-view-cell">产品期限</li>
