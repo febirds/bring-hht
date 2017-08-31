@@ -51,7 +51,7 @@ public class ProductController {
             Date now = new Date();
             for (UserPdtOrderChgVo vo: uvos) {
                 if (!StringUtils.isEmpty(vo.getReturnDate())) {
-                    Date returnDate = format.parse(vo.getReturnDate().substring(0, 10));
+                    Date returnDate = format.parse(vo.getReturnDate().substring(0, 19));
                     if (returnDate.compareTo(now) < 0) {
                         continue;
                     }
