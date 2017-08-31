@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -44,7 +47,15 @@ public class ProductController {
             }
             List<String> cardNos = new ArrayList<String>();
             List<UserPdtOrderChgVo> list = new ArrayList<UserPdtOrderChgVo>();
+            DateFormat format = SimpleDateFormat.getDateInstance();
+            Date now = new Date();
             for (UserPdtOrderChgVo vo: uvos) {
+                if (!StringUtils.isEmpty(vo.getReturnDate())) {
+                    Date returnDate = format.parse(vo.getReturnDate());
+                    if (returnDate.compareTo(now) < 0) {
+                        continue;
+                    }
+                }
                 if (!cardNos.contains(vo.getCardno())) {
                     vo.setUserName(cvos != null?cvos[0].getCustomerName():vo.getUserName());
                     list.add(vo);
@@ -57,6 +68,8 @@ public class ProductController {
             ex.printStackTrace();
         } catch (java.rmi.RemoteException ex) {
             ex.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
         return new ModelAndView("queryProduct/list", map);
     }
