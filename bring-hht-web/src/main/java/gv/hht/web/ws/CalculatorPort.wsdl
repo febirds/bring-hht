@@ -5,7 +5,7 @@
              targetNamespace="http://ws.myeclipseide.com/">
   <types>
     <xsd:schema>
-      <xsd:import namespace="http://ws.myeclipseide.com/" schemaLocation="http://kvesv3.natappfree.cc/WebChargePro/CalculatorPort?xsd=1"></xsd:import>
+      <xsd:import namespace="http://ws.myeclipseide.com/" schemaLocation="http://469hfg.natappfree.cc/WebChargePro/CalculatorPort?xsd=1"></xsd:import>
     </xsd:schema>
   </types>
   <message name="getCustomerAll">
@@ -319,7 +319,7 @@
   </binding>
   <service name="CalculatorService">
     <port binding="tns:CalculatorPortBinding" name="CalculatorPort">
-      <soap:address location="http://kvesv3.natappfree.cc/WebChargePro/CalculatorPort"></soap:address>
+      <soap:address location="http://469hfg.natappfree.cc/WebChargePro/CalculatorPort"></soap:address>
     </port>
   </service>
 </definitions>

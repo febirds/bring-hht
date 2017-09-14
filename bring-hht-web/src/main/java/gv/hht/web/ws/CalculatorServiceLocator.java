@@ -22,7 +22,7 @@ public class CalculatorServiceLocator extends org.apache.axis.client.Service imp
     }
 
     // Use to get a proxy class for CalculatorPort
-    private String CalculatorPort_address = "http://kvesv3.natappfree.cc/WebChargePro/CalculatorPort";
+    private String CalculatorPort_address = "http://469hfg.natappfree.cc/WebChargePro/CalculatorPort";
 
     public String getCalculatorPortAddress() {
         return CalculatorPort_address;
